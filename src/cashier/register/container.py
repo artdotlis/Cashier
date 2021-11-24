@@ -15,7 +15,7 @@ class PurchasedItem:
         This ``dataclass`` is ``final`` and should not be used as a superclass.
     """
     imported: bool
-    """`bool`: Is the item imported."""
+    """`bool`: Whether the item is imported or not."""
     name: str
     """`str`: The name of the item."""
     price: Decimal
@@ -23,4 +23,4 @@ class PurchasedItem:
     cnt: int
     """`int`: The amount of the items to purchase."""
     taxed: bool
-    """`bool`: Describes if the basic sales taxes should be applied."""
+    """`bool`: Describes whether the basic sales taxes should be applied."""
