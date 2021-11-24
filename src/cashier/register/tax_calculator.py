@@ -26,12 +26,20 @@ class TaxCalculator:
             The basic sales taxes.
         """
         super().__init__()
+        buf_import = import_taxes
+        buf_normal = normal_taxes
+        if import_taxes < 0:
+            print("Import sales taxes cant be negative, setting to 0.05.")
+            buf_import = 0.05
+        if normal_taxes < 0:
+            print("Basic sales taxes cant be negative, setting to 0.10.")
+            buf_normal = 0.1
         # precision for: one decimal place, two decimal places
         self.__precision: tuple[Decimal, Decimal] = (Decimal("0.0"), Decimal("0.00"))
         self.__multiplier: Decimal = Decimal("2")
         # taxes: imported, normal, none
         self.__taxes: tuple[Decimal, Decimal, Decimal] = (
-            Decimal(str(import_taxes)), Decimal(str(normal_taxes)), Decimal("0")
+            Decimal(str(buf_import)), Decimal(str(buf_normal)), Decimal("0")
         )
 
     def _calc_tax(self, price: Decimal, tax: Decimal, cnt: int, /) -> Decimal:
@@ -45,7 +53,7 @@ class TaxCalculator:
         Parameters
         ----------
         price : `decimal.Decimal`
-            The price of the purchased item.
+            The price of the purchased item. Must be greater than zero.
         tax : `decimal.Decimal`
             The sales tax, which will be used in the tax-calculation.
         cnt : int
