@@ -7,7 +7,7 @@ from src.cashier.version import VERSION
 def main() -> None:
     arg_parser = argparse.ArgumentParser(
         prog='cashier',
-        description="A library for building artificial neural networks."
+        description="A library for calculating sales taxes for purchased items."
     )
     arg_parser.add_argument('--version', action='version', version=VERSION)
 
