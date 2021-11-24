@@ -7,7 +7,7 @@ from src.cashier.register.container import PurchasedItem
 from src.cashier.register.tax_calculator import TaxCalculator
 
 
-def _p_item_creator(item_i: int, price: Decimal, cnt: int, imp: bool, tax: bool) -> PurchasedItem:
+def _p_it_cr(item_i: int, price: Decimal, cnt: int, imp: bool, tax: bool) -> PurchasedItem:
     return PurchasedItem(
         imported=imp, name=f"item_{item_i}",
         price=price,
@@ -44,11 +44,11 @@ def tax_tests_basic() -> tuple[list[tuple[Decimal, int, str]], Decimal]:
 @pytest.fixture
 def taxed_items(tax_tests_basic) -> tuple[Decimal, list[tuple[PurchasedItem, str]]]:
     sales_only_tax = [
-        (_p_item_creator(item_i, item_el[0], item_el[1], False, True), item_el[2])
+        (_p_it_cr(item_i, item_el[0], item_el[1], False, True), item_el[2])
         for item_i, item_el in enumerate(tax_tests_basic[0], 1)
     ]
     sales_only_tax.extend(
-        (_p_item_creator(item_i, -1 * item_el[0], item_el[1], False, True), item_el[2])
+        (_p_it_cr(item_i, -1 * item_el[0], item_el[1], False, True), item_el[2])
         for item_i, item_el in enumerate(tax_tests_basic[0], 1)
     )
     return tax_tests_basic[1], sales_only_tax
@@ -59,10 +59,10 @@ def taxed_imported_items(tax_tests_basic) \
         -> tuple[Decimal, Decimal, list[tuple[PurchasedItem, str]]]:
     import_tax = Decimal('0.05')
     imported_taxes = [
-        (_p_item_creator(0, Decimal('10.00'), 1, True, True), '1.50'),
-        (_p_item_creator(0, Decimal('10.00'), 3, True, True), '4.50'),
-        (_p_item_creator(0, Decimal('-10.00'), 1, True, True), '1.50'),
-        (_p_item_creator(0, Decimal('-10.00'), 3, True, True), '4.50')
+        (_p_it_cr(0, Decimal('10.00'), 1, True, True), '1.50'),
+        (_p_it_cr(0, Decimal('10.00'), 3, True, True), '4.50'),
+        (_p_it_cr(0, Decimal('-10.00'), 1, True, True), '1.50'),
+        (_p_it_cr(0, Decimal('-10.00'), 3, True, True), '4.50')
     ]
     return tax_tests_basic[1], import_tax, imported_taxes
 
@@ -70,14 +70,19 @@ def taxed_imported_items(tax_tests_basic) \
 @pytest.fixture
 def no_tax() -> list[tuple[PurchasedItem, str]]:
     return [
-        (_p_item_creator(0, Decimal('10.00'), 1, False, False), '0.00'),
-        (_p_item_creator(0, Decimal('10.00'), 3, False, False), '0.00'),
-        (_p_item_creator(0, Decimal('-10.00'), 1, False, False), '0.00'),
-        (_p_item_creator(0, Decimal('-10.00'), 3, False, False), '0.00')
+        (_p_it_cr(0, Decimal('10.00'), 1, False, False), '0.00'),
+        (_p_it_cr(0, Decimal('10.00'), 3, False, False), '0.00'),
+        (_p_it_cr(0, Decimal('-10.00'), 1, False, False), '0.00'),
+        (_p_it_cr(0, Decimal('-10.00'), 3, False, False), '0.00')
     ]
 
 
 class TestTaxCalculator:
+
+    def test_calc_tax_zero(self, tax_calc):
+        price = Decimal('10.00')
+        zero = Decimal('0.00')
+        assert str(tax_calc._calc_tax(price, zero, 2)) == '0.00'
 
     def test_calc_tax(self, tax_calc, tax_tests_basic):
         for test_i in tax_tests_basic[0]:
