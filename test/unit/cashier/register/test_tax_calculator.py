@@ -42,6 +42,15 @@ def tax_tests_basic() -> tuple[list[tuple[Decimal, int, str]], Decimal]:
 
 
 @pytest.fixture
+def zero_taxed_items() -> list[PurchasedItem]:
+    return [
+        _p_it_cr(0, Decimal('10.00'), 2, True, True),
+        _p_it_cr(1, Decimal('10.00'), 2, False, True),
+        _p_it_cr(1, Decimal('10.00'), 2, True, False)
+    ]
+
+
+@pytest.fixture
 def taxed_items(tax_tests_basic) -> tuple[Decimal, list[tuple[PurchasedItem, str]]]:
     sales_only_tax = [
         (_p_it_cr(item_i, item_el[0], item_el[1], False, True), item_el[2])
@@ -92,14 +101,11 @@ class TestTaxCalculator:
         for tax_i in init_tax:
             assert TaxCalculator.check_taxes(tax_i[0], tax_i[1], "") == tax_i[1]
 
-    def test_calc_tax_zero(self, tax_calc):
-        price = Decimal('10.00')
-        zero = Decimal('0.00')
-        assert str(tax_calc._calc_tax(price, zero, 2)) == '0.00'
-
-    def test_calc_tax(self, tax_calc, tax_tests_basic):
-        for test_i in tax_tests_basic[0]:
-            assert str(tax_calc._calc_tax(test_i[0], tax_tests_basic[1], test_i[1])) == test_i[2]
+    def test_tax_zero(self, tax_calc, zero_taxed_items):
+        tax_calc.new_normal_tax(float(Decimal('0.00')))
+        tax_calc.new_import_tax(float(Decimal('0.00')))
+        for test_i in zero_taxed_items:
+            assert str(tax_calc.tax(test_i)) == '0.00'
 
     def test_tax_basic(self, tax_calc, taxed_items):
         tax_calc.new_normal_tax(float(taxed_items[0]))
