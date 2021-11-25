@@ -4,7 +4,7 @@ import decimal
 from decimal import Decimal
 from typing import final
 
-from src.cashier.register.container import PurchasedItem
+from src.cashier.purchase.container import PurchasedItem
 
 
 @final

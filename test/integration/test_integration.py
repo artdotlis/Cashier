@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from src.cashier.register.bill import Bill
-from src.cashier.register.formatter import InFormatter, OutFormatter
-from src.cashier.register.registrer import decide_if_taxed, get_default_out, get_default_terms
-from src.cashier.register.tax_calculator import TaxCalculator
+from src.cashier.purchase.bill import Bill
+from src.cashier.purchase.formatter import InFormatter, OutFormatter
+from src.cashier.registrer import decide_if_taxed, get_default_out, get_default_terms
+from src.cashier.purchase.tax_calculator import TaxCalculator
 
 
 @pytest.fixture

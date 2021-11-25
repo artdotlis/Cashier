@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from src.cashier.register.formatter import OutFormatter, InFormatter
-from src.cashier.register.registrer import get_default_out, get_default_terms
+from src.cashier.purchase.formatter import OutFormatter, InFormatter
+from src.cashier.registrer import get_default_out, get_default_terms
 
 
 @pytest.fixture
@@ -16,5 +16,5 @@ def in_formatter() -> InFormatter:
     in_term_str = get_default_terms()
     # lambda str_val: True
     # Because the exact behavior of this function is
-    # not implemented in src.cashier.register.formatter
+    # not implemented in src.cashier.purchase.formatter
     return InFormatter(in_term_str[0], in_term_str[1], lambda str_val: True)

@@ -4,9 +4,9 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Final
 
-from src.cashier.register.bill import Bill
-from src.cashier.register.formatter import InFormatter, OutFormatter
-from src.cashier.register.tax_calculator import TaxCalculator
+from src.cashier.purchase.bill import Bill
+from src.cashier.purchase.formatter import InFormatter, OutFormatter
+from src.cashier.purchase.tax_calculator import TaxCalculator
 
 
 # default values for the input-formatter

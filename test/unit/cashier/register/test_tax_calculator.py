@@ -3,8 +3,8 @@ from decimal import Decimal
 
 import pytest
 
-from src.cashier.register.container import PurchasedItem
-from src.cashier.register.tax_calculator import TaxCalculator
+from src.cashier.purchase.container import PurchasedItem
+from src.cashier.purchase.tax_calculator import TaxCalculator
 
 
 pytest_plugins = ("test.unit.fixture.taxes",)
