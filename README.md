@@ -31,6 +31,12 @@ Latest
 $ pip install git+https://github.com/arturOnRails/Cashier.git 
 ```
 
+Specific release
+
+```shell
+$ pip install git+https://github.com/arturOnRails/Cashier.git@<TAG>#egg=Cashier
+```
+
 ## Usage
 
 For more information use:
