@@ -117,6 +117,8 @@ def _read_tax_file(tax_file: None | Path, /) -> set[str]:  # pragma: no cover
         The set can be empty.
 
     """
+    if tax_file is None:
+        return set()
     if tax_file.exists() and tax_file.is_file():
         with tax_file.open('r') as fh_r:
             return {line.rstrip() for line in fh_r}
