@@ -23,11 +23,11 @@ class OutFormatter:
         Parameters
         ----------
         total : `str`
-            Prefix for the total price of an item.
+            The prefix for the total price of an item.
         sales_taxes : `str`
-            Prefix for the sales taxes output.
+            The prefix for the sales taxes output.
         imported : `str`
-            String used as the imported description of an items.
+            The string used as the imported description for an items.
         """
         super().__init__()
         self.__total_pre: str = total
@@ -41,7 +41,7 @@ class OutFormatter:
         Parameters
         ----------
         sales_taxes : `decimal.Decimal`
-            Value for sales taxes used for all purchased item.
+            The sales taxes value used for all purchased item.
 
         Returns
         -------
@@ -57,7 +57,7 @@ class OutFormatter:
         Parameters
         ----------
         total : `decimal.Decimal`
-            Sum of all prices of the purchased items and their sales taxes.
+            The sum of all prices of the purchased items and their sales taxes.
 
         Returns
         -------
@@ -73,9 +73,9 @@ class OutFormatter:
         Parameters
         ----------
         p_item : `src.cashier.register.container.PurchasedItem`
-            Purchased item.
+            The purchased item.
         tax_v : `decimal.Decimal`
-            Value for the sales taxes used for the purchased item.
+            The sales taxes value used for the purchased item.
 
         Returns
         -------
@@ -114,9 +114,9 @@ class InFormatter:
         Parameters
         ----------
         term_str : `str`
-            Input string, which terminates all ongoing purchases.
+            The input string, which terminates all ongoing purchases.
         buy_str : `str`
-            Input string, which terminates the current ongoing purchase.
+            The input string, which terminates the current ongoing purchase.
         taxed_f : `collections.abc.Callable` [[ `str` ], `bool` ]
             Function, which decides whether the basic taxes apply to a given item.
         """
@@ -135,7 +135,7 @@ class InFormatter:
         Parameters
         ----------
         in_str : `str`
-            Input string, which should be analyzed.
+            The input string, which should be analyzed.
 
         Returns
         -------
@@ -154,7 +154,7 @@ class InFormatter:
         Parameters
         ----------
         in_str : `str`
-            Input string, which should be analyzed.
+            The input string, which should be analyzed.
 
         Returns
         -------
@@ -173,7 +173,7 @@ class InFormatter:
         Parameters
         ----------
         in_str : `str`
-            Input string, which should be analyzed.
+            The input string, which should be analyzed.
 
         Returns
         -------
