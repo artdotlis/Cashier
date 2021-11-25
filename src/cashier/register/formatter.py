@@ -85,7 +85,7 @@ class OutFormatter:
         return f"{p_item.cnt}{' ' + self.__imported if p_item.imported else ''} " \
                + f"{p_item.name}: {p_item.price + tax_v}"
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: no cover
         return "---\nOUTPUT format:\n" + \
                f"\t[item cnt] ({self.__imported}) [item name]: [price with taxes]\n" + \
                f"\t{self.__sales_taxes_pre}: [value]\n" + \
@@ -201,7 +201,7 @@ class InFormatter:
             taxed=self.__taxed_f(item_name)
         )
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: no cover
         return "---\nINPUT format:\n" + \
                f"\tpattern: {_DI_ITEM.pattern}\n" + \
                "\tsimple input: [item cnt] (imported) [item name] at [price]\n" + \

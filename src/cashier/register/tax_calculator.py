@@ -26,21 +26,42 @@ class TaxCalculator:
             The basic sales taxes.
         """
         super().__init__()
-        buf_import = import_taxes
-        buf_normal = normal_taxes
-        if import_taxes < 0:
-            print("Import sales taxes cant be negative, setting to 0.05.")
-            buf_import = 0.05
-        if normal_taxes < 0:
-            print("Basic sales taxes cant be negative, setting to 0.10.")
-            buf_normal = 0.1
         # precision for: one decimal place, two decimal places
         self.__precision: tuple[Decimal, Decimal] = (Decimal("0.0"), Decimal("0.00"))
         self.__multiplier: Decimal = Decimal("2")
         # taxes: imported, normal, none
         self.__taxes: tuple[Decimal, Decimal, Decimal] = (
-            Decimal(str(buf_import)), Decimal(str(buf_normal)), Decimal("0")
+            Decimal(str(self.check_taxes(
+                import_taxes, 0.05, "Import sales taxes cant be negative, setting to 0.05."
+            ))),
+            Decimal(str(self.check_taxes(
+                normal_taxes, 0.1, "Basic sales taxes cant be negative, setting to 0.10."
+            ))), Decimal("0")
         )
+
+    @staticmethod
+    def check_taxes(tax: float, default_t: float, msg: str, /) -> float:
+        """
+        Checks whether the given tax is negative.
+
+        Parameters
+        ----------
+        tax : `float`
+            The tax value is to be tested.
+        default_t : `float`
+            The replacement value for a negative ``tax`` value.
+        msg : `str`
+            The message to be printed when ``tax`` is negative.
+
+        Returns
+        -------
+        `float`
+            The corrected value for the sales tax.
+        """
+        if tax >= 0:
+            return tax
+        print(msg)
+        return default_t
 
     def _calc_tax(self, price: Decimal, tax: Decimal, cnt: int, /) -> Decimal:
         """
@@ -122,7 +143,7 @@ class TaxCalculator:
         """
         self.__taxes = (self.__taxes[0], Decimal(str(tax)), self.__taxes[2])
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: no cover
         return "---\nTAXES:\n" + \
                f"\textra import sales tax: {self.__taxes[0]}\n" + \
                f"\tbasic sales tax: {self.__taxes[1]}\n---"
