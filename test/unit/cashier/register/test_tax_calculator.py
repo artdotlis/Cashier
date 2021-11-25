@@ -59,10 +59,12 @@ def taxed_imported_items(tax_tests_basic) \
         -> tuple[Decimal, Decimal, list[tuple[PurchasedItem, str]]]:
     import_tax = Decimal('0.05')
     imported_taxes = [
-        (_p_it_cr(0, Decimal('10.00'), 1, True, True), '1.50'),
-        (_p_it_cr(0, Decimal('10.00'), 3, True, True), '4.50'),
-        (_p_it_cr(0, Decimal('-10.00'), 1, True, True), '1.50'),
-        (_p_it_cr(0, Decimal('-10.00'), 3, True, True), '4.50')
+        (_p_it_cr(1, Decimal('10.00'), 1, True, True), '1.50'),
+        (_p_it_cr(2, Decimal('10.00'), 3, True, True), '4.50'),
+        (_p_it_cr(3, Decimal('-10.00'), 1, True, True), '1.50'),
+        (_p_it_cr(4, Decimal('-10.00'), 3, True, True), '4.50'),
+        (_p_it_cr(5, Decimal('10.00'), 1, True, False), '0.50'),
+        (_p_it_cr(6, Decimal('-10.00'), 3, True, False), '1.50')
     ]
     return tax_tests_basic[1], import_tax, imported_taxes
 
@@ -70,14 +72,25 @@ def taxed_imported_items(tax_tests_basic) \
 @pytest.fixture
 def no_tax() -> list[tuple[PurchasedItem, str]]:
     return [
-        (_p_it_cr(0, Decimal('10.00'), 1, False, False), '0.00'),
-        (_p_it_cr(0, Decimal('10.00'), 3, False, False), '0.00'),
-        (_p_it_cr(0, Decimal('-10.00'), 1, False, False), '0.00'),
-        (_p_it_cr(0, Decimal('-10.00'), 3, False, False), '0.00')
+        (_p_it_cr(1, Decimal('10.00'), 1, False, False), '0.00'),
+        (_p_it_cr(2, Decimal('10.00'), 3, False, False), '0.00'),
+        (_p_it_cr(3, Decimal('-10.00'), 1, False, False), '0.00'),
+        (_p_it_cr(4, Decimal('-10.00'), 3, False, False), '0.00')
+    ]
+
+
+@pytest.fixture
+def init_tax() -> list[tuple[float, float]]:
+    return [
+        (0.0, 0.0), (-2.0, 1.0), (2.0, 2.0)
     ]
 
 
 class TestTaxCalculator:
+
+    def test_input(self, init_tax):
+        for tax_i in init_tax:
+            assert TaxCalculator.check_taxes(tax_i[0], tax_i[1], "") == tax_i[1]
 
     def test_calc_tax_zero(self, tax_calc):
         price = Decimal('10.00')
@@ -93,7 +106,7 @@ class TestTaxCalculator:
         for test_i in taxed_items[1]:
             assert str(tax_calc.tax(test_i[0])) == test_i[1]
 
-    def test_tax_import(self, tax_calc, taxed_imported_items):
+    def test_tax_basic_import(self, tax_calc, taxed_imported_items):
         tax_calc.new_normal_tax(float(taxed_imported_items[0]))
         tax_calc.new_import_tax(float(taxed_imported_items[1]))
         for test_i in taxed_imported_items[2]:
