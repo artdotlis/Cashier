@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module providing input and output formatters."""
+"""A module providing input and output formatters."""
 import re
 from re import Pattern
 from decimal import Decimal
@@ -23,11 +23,11 @@ class OutFormatter:
         Parameters
         ----------
         total : `str`
-            The prefix for the total price of an item.
+            Prefix for the total price of an item.
         sales_taxes : `str`
-            The prefix for the sales taxes output.
+            Prefix for the sales taxes output.
         imported : `str`
-            The string used as the imported description of an items.
+            String used as the imported description of an items.
         """
         super().__init__()
         self.__total_pre: str = total
@@ -41,7 +41,7 @@ class OutFormatter:
         Parameters
         ----------
         sales_taxes : `decimal.Decimal`
-            The value for sales taxes of all purchased item.
+            Value for sales taxes used for all purchased item.
 
         Returns
         -------
@@ -57,7 +57,7 @@ class OutFormatter:
         Parameters
         ----------
         total : `decimal.Decimal`
-            The sum of all prices of the purchased items and their sales taxes.
+            Sum of all prices of the purchased items and their sales taxes.
 
         Returns
         -------
@@ -73,9 +73,9 @@ class OutFormatter:
         Parameters
         ----------
         p_item : `src.cashier.register.container.PurchasedItem`
-            The purchased item.
+            Purchased item.
         tax_v : `decimal.Decimal`
-            The value for the sales taxes of the purchased item.
+            Value for the sales taxes used for the purchased item.
 
         Returns
         -------
@@ -114,11 +114,11 @@ class InFormatter:
         Parameters
         ----------
         term_str : `str`
-            The input string which terminates all ongoing purchases.
+            Input string, which terminates all ongoing purchases.
         buy_str : `str`
-            The input string which terminates the current ongoing purchase.
+            Input string, which terminates the current ongoing purchase.
         taxed_f : `collections.abc.Callable` [[ `str` ], `bool` ]
-            The function which decides whether the basic taxes apply to a given item.
+            Function, which decides whether the basic taxes apply to a given item.
         """
         super().__init__()
         self.__term_str: str = term_str
@@ -135,7 +135,7 @@ class InFormatter:
         Parameters
         ----------
         in_str : `str`
-            The input string to be analyzed.
+            Input string, which should be analyzed.
 
         Returns
         -------
@@ -154,7 +154,7 @@ class InFormatter:
         Parameters
         ----------
         in_str : `str`
-            The input string to be analyzed.
+            Input string, which should be analyzed.
 
         Returns
         -------
@@ -173,15 +173,14 @@ class InFormatter:
         Parameters
         ----------
         in_str : `str`
-            The input string to be analyzed.
+            Input string, which should be analyzed.
 
         Returns
         -------
-        `tuple` [ `bool`, `None` | `src.cashier.register.container.PurchasedItem` ]
-            A tuple containing two elements.
-            The first value describes whether the input string is valid.
-            The second value contains either None or ``PurchasedItem``.
-
+        `bool`
+            Describes whether the input string is valid.
+        `None` | `src.cashier.register.container.PurchasedItem`
+            Contains either None or ``PurchasedItem``.
         """
         match_res = _DI_ITEM.match(in_str.strip())
         if match_res is None or not match_res.group(2).strip():

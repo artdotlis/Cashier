@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module used for calculating taxes."""
+"""A module used for calculating taxes."""
 import decimal
 from decimal import Decimal
 from typing import final
@@ -21,9 +21,9 @@ class TaxCalculator:
         Parameters
         ----------
         import_taxes : `float`
-            The sales taxes for imported items.
+            Sales taxes for imported items.
         normal_taxes : `float`
-            The basic sales taxes.
+            Basic sales taxes.
         """
         super().__init__()
         # precision for: one decimal place, two decimal places
@@ -47,11 +47,11 @@ class TaxCalculator:
         Parameters
         ----------
         tax : `float`
-            The tax value is to be tested.
+            Tax value that should be tested.
         default_t : `float`
-            The replacement value for a negative ``tax`` value.
+            Replacement value for a negative ``tax`` value.
         msg : `str`
-            The message to be printed when ``tax`` is negative.
+            Message to be printed when ``tax`` is negative.
 
         Returns
         -------
@@ -74,11 +74,11 @@ class TaxCalculator:
         Parameters
         ----------
         price : `decimal.Decimal`
-            The price of the purchased item. Must be greater than zero.
+            Price of the purchased item. Must be greater than zero.
         tax : `decimal.Decimal`
-            The sales tax, which will be used in the tax-calculation.
+            Sales tax, which will be used in the tax-calculation.
         cnt : int
-            The amount of the purchased item.
+            Amount of the purchased item.
 
         Returns
         -------
@@ -104,7 +104,7 @@ class TaxCalculator:
         Parameters
         ----------
         p_item: `src.cashier.register.container.PurchasedItem`
-            The purchased item.
+            Purchased item.
 
         Returns
         -------
@@ -128,7 +128,7 @@ class TaxCalculator:
         Parameters
         ----------
         tax : `float`
-            The new value for the import sales taxes.
+            New value for the import sales taxes.
         """
         self.__taxes = (Decimal(str(tax)), self.__taxes[1], self.__taxes[2])
 
@@ -139,7 +139,7 @@ class TaxCalculator:
         Parameters
         ----------
         tax : `float`
-            The new value for the basic sales taxes.
+            New value for the basic sales taxes.
         """
         self.__taxes = (self.__taxes[0], Decimal(str(tax)), self.__taxes[2])
 

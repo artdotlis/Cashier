@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""A module providing global data containers."""
 from dataclasses import dataclass
 from decimal import Decimal
 from typing import final
@@ -12,7 +13,7 @@ class PurchasedItem:
 
     Notes
     -----
-        This ``dataclass`` is ``final`` and should not be used as a superclass.
+        This ``dataclass`` is ``@final`` and should not be used as a superclass.
     """
     imported: bool
     """`bool`: Whether the item is imported or not."""
