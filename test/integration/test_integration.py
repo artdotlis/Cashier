@@ -36,7 +36,7 @@ def _parse_input(bill_list: list[Bill], input_str: str,
     if in_form.is_not_term(input_str):
         if in_form.is_not_bought(input_str):
             p_item = in_form.analyse_input(input_str)
-            if p_item[0]:
+            if p_item[0] and p_item[1] is not None:
                 bill_list[-1].add_item(p_item[1])
         else:
             bill_list.append(Bill(out_form, tax_calc))
