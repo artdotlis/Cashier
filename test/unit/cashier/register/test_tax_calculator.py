@@ -7,6 +7,9 @@ from src.cashier.register.container import PurchasedItem
 from src.cashier.register.tax_calculator import TaxCalculator
 
 
+pytest_plugins = ("test.unit.fixture.taxes",)
+
+
 def _p_it_cr(item_i: int, price: Decimal, cnt: int, imp: bool, tax: bool) -> PurchasedItem:
     return PurchasedItem(
         imported=imp, name=f"item_{item_i}",
@@ -14,11 +17,6 @@ def _p_it_cr(item_i: int, price: Decimal, cnt: int, imp: bool, tax: bool) -> Pur
         cnt=cnt,
         taxed=tax
     )
-
-
-@pytest.fixture
-def tax_calc() -> TaxCalculator:
-    return TaxCalculator(0.05, 0.1)
 
 
 @pytest.fixture

@@ -4,14 +4,10 @@ from decimal import Decimal
 import pytest
 
 from src.cashier.register.container import PurchasedItem
-from src.cashier.register.formatter import OutFormatter, InFormatter
 from src.cashier.register.registrer import get_default_terms, get_default_out
 
 
-@pytest.fixture
-def out_formatter() -> OutFormatter:
-    out_str = get_default_out()
-    return OutFormatter(out_str[0], out_str[1], out_str[2])
+pytest_plugins = ("test.unit.fixture.formatter",)
 
 
 @pytest.fixture
@@ -38,15 +34,6 @@ class TestOutFormatter:
     def test_list_item(self, out_formatter, out_p_item_list):
         for out_i in out_p_item_list:
             assert out_formatter.out_list_item(out_i[0], out_i[1]) == out_i[2]
-
-
-@pytest.fixture
-def in_formatter() -> InFormatter:
-    in_term_str = get_default_terms()
-    # lambda str_val: True
-    # Because the exact behavior of this function is
-    # not implemented in src.cashier.register.formatter
-    return InFormatter(in_term_str[0], in_term_str[1], lambda str_val: True)
 
 
 @pytest.fixture
