@@ -3,9 +3,9 @@
 from decimal import Decimal
 from typing import final, Iterable
 
-from src.cashier.register.container import PurchasedItem
-from src.cashier.register.formatter import OutFormatter
-from src.cashier.register.tax_calculator import TaxCalculator
+from src.cashier.purchase.container import PurchasedItem
+from src.cashier.purchase.formatter import OutFormatter
+from src.cashier.purchase.tax_calculator import TaxCalculator
 
 
 @final

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from src.cashier.register.tax_calculator import TaxCalculator
+from src.cashier.purchase.tax_calculator import TaxCalculator
 
 
 @pytest.fixture

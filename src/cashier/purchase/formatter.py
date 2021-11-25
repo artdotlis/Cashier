@@ -6,7 +6,7 @@ from decimal import Decimal
 from collections.abc import Callable
 from typing import final, Final
 
-from src.cashier.register.container import PurchasedItem
+from src.cashier.purchase.container import PurchasedItem
 
 
 @final

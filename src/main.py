@@ -2,7 +2,7 @@
 import argparse
 import sys
 
-from src.cashier.register.registrer import start_register
+from src.cashier.registrer import start_register
 from src.cashier.version import VERSION
 
 
