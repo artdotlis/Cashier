@@ -32,7 +32,7 @@ setuptools.setup(
     zip_safe=False,
     entry_points={
         'console_scripts': [
-            'cashier=src.cashier.main:main'
+            'cashier=src.main:main'
         ]
     }
 )
