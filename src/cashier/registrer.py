@@ -125,7 +125,16 @@ def _read_tax_file(tax_file: None | Path, /) -> set[str]:  # pragma: no cover
     return set()
 
 
-def start_register(tax_file: Path, /) -> None:  # pragma: no cover
+def start_register(tax_file: None | Path, /) -> None:  # pragma: no cover
+    """
+    Starts the software.
+
+    Parameters
+    ----------
+    tax_file : `None` | `pathlib.Path`
+        The optional file containing the names of items,
+        which omit taxation.
+    """
     in_form = InFormatter(
         _DI_TERM, _DI_BUY, decide_if_taxed(_read_tax_file(tax_file))
     )
@@ -141,7 +150,7 @@ def start_register(tax_file: Path, /) -> None:  # pragma: no cover
     while in_form.is_not_term(input_str := input()):
         if in_form.is_not_bought(input_str):
             p_item = in_form.analyse_input(input_str)
-            if p_item[0]:
+            if p_item[0] and p_item[1] is not None:
                 print(bill_list[-1].add_item(p_item[1]))
             else:
                 print("input pattern was not recognised")

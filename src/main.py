@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""main function"""
 import argparse
 import sys
 
@@ -7,6 +8,11 @@ from src.cashier.version import VERSION
 
 
 def main() -> None:
+    """
+    The main function.
+
+    Analyses the given arguments and starts the software.
+    """
     arg_parser = argparse.ArgumentParser(
         prog='cashier',
         description="A library for calculating sales taxes for purchased items."

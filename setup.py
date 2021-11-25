@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
-# https://packaging.python.org/tutorials/packaging-projects/
+"""
+Packaging Python Projects.
+
+See Also
+--------
+    `https://packaging.python.org/tutorials/packaging-projects/`_
+"""
 from pathlib import Path
 import setuptools  # type: ignore
 
 from src.cashier.version import VERSION
 
 
-with Path("README.md").open("r") as fh_read_me:
+with Path("README.md").open("r", encoding="utf-8") as fh_read_me:
     READ_ME = fh_read_me.read()
 
 setuptools.setup(
