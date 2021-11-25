@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import argparse
 
+from src.cashier.register.registrer import start_register
 from src.cashier.version import VERSION
 
 
@@ -10,9 +11,7 @@ def main() -> None:
         description="A library for calculating sales taxes for purchased items."
     )
     arg_parser.add_argument('--version', action='version', version=VERSION)
-
-    pass
-
+    start_register()
     print("[closed]")
 
 
