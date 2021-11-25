@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""A module providing a starting procedure."""
+from collections.abc import Callable
+from pathlib import Path
 from typing import Final
 
 from src.cashier.register.bill import Bill
@@ -22,22 +25,108 @@ _D_TAX_E: Final[set[str]] = {
 
 
 def get_default_terms() -> tuple[str, str]:
+    """
+    Returns private default values.
+
+    Returns
+    -------
+    `str`
+        Default string for terminating all purchases.
+    `str`
+        Default string for terminating the current purchases.
+    """
     return _DI_TERM, _DI_BUY
 
 
 def get_default_out() -> tuple[str, str, str]:
+    """
+    Returns private default values.
+
+    Returns
+    -------
+    `str`
+        Default string for describing the purchase price.
+    `str`
+        Default string for the sum of all sales taxes of the purchase.
+    `str`
+        Default string for describing an imported item.
+    """
     return _DO_TOTAL, _DO_SALES_T, _DO_IMP
 
 
-def decide_if_taxed(in_str: str, /) -> bool:
-    for item_sub_name in in_str.split(" "):
-        if item_sub_name in _D_TAX_E:
-            return False
-    return True
+def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:  # pragma: no cover
+    """
+    Creates an decider function for omitting taxation.
+
+    Parameters
+    ----------
+    n_taxed : `set` [ `str` ]
+        The set containing all items, which should not be taxed.
+        If empty, a default set will be chosen.
+
+    Returns
+    -------
+    `collections.abc.Callable` [[ `str` ], `bool` ]
+        Decider function for omitting taxation.
 
 
-def start_register() -> None:  # pragma: no cover
-    in_form = InFormatter(_DI_TERM, _DI_BUY, decide_if_taxed)
+    """
+    local_set = _D_TAX_E
+    if n_taxed:
+        local_set = n_taxed
+
+    def _decide_if_taxed(in_str: str, /) -> bool:
+        """
+        Checks whether an item is taxed or not.
+
+        A very simple function, which look up the item in a
+        given set. This set contains all item names, which should omitted
+        from taxation.
+
+        Parameters
+        ----------
+        in_str : `str`
+            The name of the purchased item, which should be checked for taxation.
+
+        Returns
+        -------
+        `bool`
+            Whether the item is taxed or not.
+        """
+        for item_sub_name in in_str.split(" "):
+            if item_sub_name in local_set:
+                return False
+        return True
+    return _decide_if_taxed
+
+
+def _read_tax_file(tax_file: None | Path, /) -> set[str]:  # pragma: no cover
+    """
+    Creates a set with all item names, which should not be taxed.
+
+    The file should contain one name per line.
+
+    Parameters
+    ----------
+    tax_file : `None` | `pathlib.Path`
+        The file containing item names, which should not be taxed.
+
+    Returns
+    -------
+        All items, which should be not taxed, in a set.
+        The set can be empty.
+
+    """
+    if tax_file.exists() and tax_file.is_file():
+        with tax_file.open('r') as fh_r:
+            return {line.rstrip() for line in fh_r}
+    return set()
+
+
+def start_register(tax_file: Path, /) -> None:  # pragma: no cover
+    in_form = InFormatter(
+        _DI_TERM, _DI_BUY, decide_if_taxed(_read_tax_file(tax_file))
+    )
     print(str(in_form))
     out_form = OutFormatter(_DO_TOTAL, _DO_SALES_T, _DO_IMP)
     print(str(out_form))

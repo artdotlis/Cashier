@@ -10,7 +10,7 @@ from src.cashier.register.tax_calculator import TaxCalculator
 @pytest.fixture
 def start_register() -> tuple[InFormatter, OutFormatter, TaxCalculator]:
     d_term = get_default_terms()
-    in_form = InFormatter(d_term[0], d_term[1], decide_if_taxed)
+    in_form = InFormatter(d_term[0], d_term[1], decide_if_taxed(set()))
     out_str = get_default_out()
     out_form = OutFormatter(out_str[0], out_str[1], out_str[2])
     tax_calc = TaxCalculator(0.05, 0.1)
