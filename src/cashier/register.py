@@ -66,7 +66,7 @@ def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:  # pragma: no c
 
     Returns
     -------
-    `collections.abc.Callable` [[ `str` ], `bool` ]
+    `Callable` [[ `str` ], `bool` ]
         Decider function for omitting taxation.
 
 
@@ -108,7 +108,7 @@ def _read_tax_file(tax_file: None | Path, /) -> set[str]:  # pragma: no cover
 
     Parameters
     ----------
-    tax_file : `None` | `pathlib.Path`
+    tax_file : `None` | `Path`
         The file containing item names, which should not be taxed.
 
     Returns
@@ -131,7 +131,7 @@ def start_register(tax_file: None | Path, /) -> None:  # pragma: no cover
 
     Parameters
     ----------
-    tax_file : `None` | `pathlib.Path`
+    tax_file : `None` | `Path`
         The optional file containing the names of items,
         which omit taxation.
     """

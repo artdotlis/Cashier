@@ -73,16 +73,16 @@ class TaxCalculator:
 
         Parameters
         ----------
-        price : `decimal.Decimal`
+        price : `Decimal`
             Price of the purchased item. Must be greater than zero.
-        tax : `decimal.Decimal`
+        tax : `Decimal`
             Sales tax, which will be used in the tax-calculation.
         cnt : int
             Amount of the purchased item.
 
         Returns
         -------
-        `decimal.Decimal`
+        `Decimal`
             Calculated and formatted sales taxes.
 
         Notes
@@ -103,12 +103,12 @@ class TaxCalculator:
 
         Parameters
         ----------
-        p_item: `src.cashier.register.container.PurchasedItem`
+        p_item: `PurchasedItem`
             Purchased item.
 
         Returns
         -------
-        `decimal.Decimal`
+        `Decimal`
             Calculated and formatted sales taxes for the purchased item ``p_item``.
         """
         abs_price: Decimal = abs(p_item.price)

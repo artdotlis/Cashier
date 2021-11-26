@@ -40,7 +40,7 @@ class OutFormatter:
 
         Parameters
         ----------
-        sales_taxes : `decimal.Decimal`
+        sales_taxes : `Decimal`
             The sales taxes value used for all purchased item.
 
         Returns
@@ -56,7 +56,7 @@ class OutFormatter:
 
         Parameters
         ----------
-        total : `decimal.Decimal`
+        total : `Decimal`
             The sum of all prices of the purchased items and their sales taxes.
 
         Returns
@@ -72,9 +72,9 @@ class OutFormatter:
 
         Parameters
         ----------
-        p_item : `src.cashier.register.container.PurchasedItem`
+        p_item : `PurchasedItem`
             The purchased item.
-        tax_v : `decimal.Decimal`
+        tax_v : `Decimal`
             The sales taxes value used for the purchased item.
 
         Returns
@@ -117,7 +117,7 @@ class InFormatter:
             The input string, which terminates all ongoing purchases.
         buy_str : `str`
             The input string, which terminates the current ongoing purchase.
-        taxed_f : `collections.abc.Callable` [[ `str` ], `bool` ]
+        taxed_f : `Callable` [[ `str` ], `bool` ]
             Function, which decides whether the basic taxes apply to a given item.
         """
         super().__init__()
@@ -179,7 +179,7 @@ class InFormatter:
         -------
         `bool`
             Describes whether the input string is valid.
-        `None` | `src.cashier.register.container.PurchasedItem`
+        `None` | `PurchasedItem`
             Contains either None or ``PurchasedItem``.
         """
         match_res = _DI_ITEM.match(in_str.strip())
