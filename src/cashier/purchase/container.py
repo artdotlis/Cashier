@@ -20,7 +20,7 @@ class PurchasedItem:
     name: str
     """`str`: The name of the item."""
     price: Decimal
-    """`decimal.Decimal`: The price of the item."""
+    """`Decimal`: The price of the item."""
     cnt: int
     """`int`: The amount of the items to purchase."""
     taxed: bool

@@ -21,9 +21,9 @@ class Bill:
         """
         Parameters
         ----------
-        formatter : `src.cashier.register.formatter.OutFormatter`
+        formatter : `OutFormatter`
             The formatter used for creating the output of the current purchase.
-        tax_calc : `src.cashier.register.tax_calculator.TaxCalculator`
+        tax_calc : `TaxCalculator`
             The calculator for the sales taxes.
         """
         super().__init__()
@@ -40,9 +40,9 @@ class Bill:
 
         Returns
         -------
-        `decimal.Decimal`
+        `Decimal`
             Sum of all sales taxes.
-        `decimal.Decimal`
+        `Decimal`
             Sum of all item prices and their sales taxes.
         """
         sales_taxes: Decimal = Decimal(str(sum(self.__taxes.values())))
@@ -113,7 +113,7 @@ class Bill:
 
         Parameters
         ----------
-        p_item : `src.cashier.register.container.PurchasedItem`
+        p_item : `PurchasedItem`
             The purchased item to be add.
 
         Returns
