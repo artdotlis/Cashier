@@ -1,6 +1,8 @@
 Cashier
 =======
 
+A library to try out DevOps tools.
+Introduces a simple shopping simulation including sales taxes.
 
 **Documentation:**
 
