@@ -15,9 +15,9 @@ class Bill:
         """
         Parameters
         ----------
-        formatter : `OutFormatter`
+        formatter : OutFormatter
             The formatter used for creating the output of the current purchase.
-        tax_calc : `TaxCalculator`
+        tax_calc : TaxCalculator
             The calculator for the sales taxes.
         """
         super().__init__()
@@ -34,9 +34,9 @@ class Bill:
 
         Returns
         -------
-        `Decimal`
+        Decimal
             Sum of all sales taxes.
-        `Decimal`
+        Decimal
             Sum of all item prices and their sales taxes.
         """
         sales_taxes: Decimal = Decimal(str(sum(self.__taxes.values())))
@@ -52,7 +52,7 @@ class Bill:
 
         Yields
         ------
-        `str`
+        str
             A formatted output for a purchased item.
         """
         for item_k, item_v in self.__items.items():
@@ -64,7 +64,7 @@ class Bill:
 
         Yields
         ------
-        `str`
+        str
             A part of the formatted output summing up the whole purchase.
             Is either the total sales taxes or the price for the whole purchase.
         """
@@ -78,7 +78,7 @@ class Bill:
 
         Yields
         ------
-        `str`
+        str
             A part of the formatted output for the whole purchase.
         """
         for item_i in self._format_item_list():
@@ -107,12 +107,12 @@ class Bill:
 
         Parameters
         ----------
-        p_item : `PurchasedItem`
+        p_item : PurchasedItem
             The purchased item to be add.
 
         Returns
         -------
-        `str`
+        str
             Description for the adding action.
         """
         if self.__item_id_gen >= self.__max_id:
@@ -131,12 +131,12 @@ class Bill:
 
         Parameters
         ----------
-        item_id : `int`
+        item_id : int
             The id of the item, which should be removed.
 
         Returns
         -------
-        `bool`
+        bool
             Whether the item was removed or not.
         """
         item_to_rem = self.__items.get(item_id, None)

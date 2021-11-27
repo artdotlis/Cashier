@@ -16,11 +16,11 @@ class OutFormatter:
         """
         Parameters
         ----------
-        total : `str`
+        total : str
             The prefix for the total price of an item.
-        sales_taxes : `str`
+        sales_taxes : str
             The prefix for the sales taxes output.
-        imported : `str`
+        imported : str
             The string used as the imported description for an items.
         """
         super().__init__()
@@ -34,12 +34,12 @@ class OutFormatter:
 
         Parameters
         ----------
-        sales_taxes : `Decimal`
+        sales_taxes : Decimal
             The sales taxes value used for all purchased item.
 
         Returns
         -------
-        `str`
+        str
             Formatted output string for the sales taxes.
         """
         return f"{self.__sales_taxes_pre}: {sales_taxes}"
@@ -50,12 +50,12 @@ class OutFormatter:
 
         Parameters
         ----------
-        total : `Decimal`
+        total : Decimal
             The sum of all prices of the purchased items and their sales taxes.
 
         Returns
         -------
-        `str`
+        str
             Formatted output string for the total price of the purchase.
         """
         return f"{self.__total_pre}: {total}"
@@ -66,14 +66,14 @@ class OutFormatter:
 
         Parameters
         ----------
-        p_item : `PurchasedItem`
+        p_item : PurchasedItem
             The purchased item.
-        tax_v : `Decimal`
+        tax_v : Decimal
             The sales taxes value used for the purchased item.
 
         Returns
         -------
-        `str`
+        str
             Formatted output string for the purchased item.
         """
         return f"{p_item.cnt}{' ' + self.__imported if p_item.imported else ''} " \
@@ -101,11 +101,11 @@ class InFormatter:
         """
         Parameters
         ----------
-        term_str : `str`
+        term_str : str
             The input string, which terminates all ongoing purchases.
-        buy_str : `str`
+        buy_str : str
             The input string, which terminates the current ongoing purchase.
-        taxed_f : `Callable` [[ `str` ], `bool` ]
+        taxed_f : Callable [[ str ], bool ]
             Function, which decides whether the basic taxes apply to a given item.
         """
         super().__init__()
@@ -122,12 +122,12 @@ class InFormatter:
 
         Parameters
         ----------
-        in_str : `str`
+        in_str : str
             The input string, which should be analyzed.
 
         Returns
         -------
-        `bool`
+        bool
             Whether to continue all purchases.
         """
         return in_str.strip() != self.__term_str
@@ -141,12 +141,12 @@ class InFormatter:
 
         Parameters
         ----------
-        in_str : `str`
+        in_str : str
             The input string, which should be analyzed.
 
         Returns
         -------
-        `bool`
+        bool
             Whether to continue the current purchase.
         """
         return in_str.strip() != self.__buy_str
@@ -156,19 +156,19 @@ class InFormatter:
         Analyses an input string.
 
         This function first checks whether the input string has a valid format,
-        If successful, it creates a ``PurchasedItem`` object based on the input.
+        If successful, it creates a `PurchasedItem` object based on the input.
 
         Parameters
         ----------
-        in_str : `str`
+        in_str : str
             The input string, which should be analyzed.
 
         Returns
         -------
-        `bool`
+        bool
             Describes whether the input string is valid.
-        `None` | `PurchasedItem`
-            Contains either None or ``PurchasedItem``.
+        None | PurchasedItem
+            Contains either None or `PurchasedItem`.
         """
         match_res = _DI_ITEM.match(in_str.strip())
         if match_res is None or not match_res.group(2).strip():
