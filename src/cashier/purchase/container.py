@@ -8,13 +8,7 @@ from typing import final
 @final
 @dataclass
 class PurchasedItem:
-    """
-    A container describing the purchased item.
-
-    Notes
-    -----
-        This ``dataclass`` is ``@final`` and should not be used as a superclass.
-    """
+    """A container describing the purchased item."""
     imported: bool
     """`bool`: Whether the item is imported or not."""
     name: str
