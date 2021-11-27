@@ -30,9 +30,9 @@ def get_default_terms() -> tuple[str, str]:
 
     Returns
     -------
-    `str`
+    str
         Default string for terminating all purchases.
-    `str`
+    str
         Default string for terminating the current purchases.
     """
     return _DI_TERM, _DI_BUY
@@ -44,11 +44,11 @@ def get_default_out() -> tuple[str, str, str]:
 
     Returns
     -------
-    `str`
+    str
         Default string for describing the purchase price.
-    `str`
+    str
         Default string for the sum of all sales taxes of the purchase.
-    `str`
+    str
         Default string for describing an imported item.
     """
     return _DO_TOTAL, _DO_SALES_T, _DO_IMP
@@ -60,13 +60,13 @@ def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:  # pragma: no c
 
     Parameters
     ----------
-    n_taxed : `set` [ `str` ]
+    n_taxed : set [ str ]
         The set containing all items, which should not be taxed.
         If empty, a default set will be chosen.
 
     Returns
     -------
-    `Callable` [[ `str` ], `bool` ]
+    Callable [[ str ], bool ]
         Decider function for omitting taxation.
 
 
@@ -85,12 +85,12 @@ def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:  # pragma: no c
 
         Parameters
         ----------
-        in_str : `str`
+        in_str : str
             The name of the purchased item, which should be checked for taxation.
 
         Returns
         -------
-        `bool`
+        bool
             Whether the item is taxed or not.
         """
         for item_sub_name in in_str.split(" "):
@@ -108,7 +108,7 @@ def _read_tax_file(tax_file: None | Path, /) -> set[str]:  # pragma: no cover
 
     Parameters
     ----------
-    tax_file : `None` | `Path`
+    tax_file : None | Path
         The file containing item names, which should not be taxed.
 
     Returns
@@ -131,7 +131,7 @@ def start_register(tax_file: None | Path, /) -> None:  # pragma: no cover
 
     Parameters
     ----------
-    tax_file : `None` | `Path`
+    tax_file : None | Path
         The optional file containing the names of items,
         which omit taxation.
     """

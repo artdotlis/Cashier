@@ -10,12 +10,12 @@ from typing import final
 class PurchasedItem:
     """A container describing the purchased item."""
     imported: bool
-    """`bool`: Whether the item is imported or not."""
+    """Whether the item is imported or not."""
     name: str
-    """`str`: The name of the item."""
+    """The name of the item."""
     price: Decimal
-    """`Decimal`: The price of the item."""
+    """The price of the item."""
     cnt: int
-    """`int`: The amount of the items to purchase."""
+    """The amount of the items to purchase."""
     taxed: bool
-    """`bool`: Describes whether the basic sales taxes should be applied."""
+    """Describes whether the basic sales taxes should be applied."""

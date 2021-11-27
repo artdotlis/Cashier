@@ -14,9 +14,9 @@ class TaxCalculator:
         """
         Parameters
         ----------
-        import_taxes : `float`
+        import_taxes : float
             Sales taxes for imported items.
-        normal_taxes : `float`
+        normal_taxes : float
             Basic sales taxes.
         """
         super().__init__()
@@ -40,16 +40,16 @@ class TaxCalculator:
 
         Parameters
         ----------
-        tax : `float`
+        tax : float
             Tax value that should be tested.
-        default_t : `float`
+        default_t : float
             Replacement value for a negative ``tax`` value.
-        msg : `str`
+        msg : str
             Message to be printed when ``tax`` is negative.
 
         Returns
         -------
-        `float`
+        float
             The corrected value for the sales tax.
         """
         if tax >= 0:
@@ -63,25 +63,25 @@ class TaxCalculator:
 
         This method returns the sales tax for ``cnt`` items
         with the same ``price``. The sales tax value is rounder and
-        formatted based on the rules defined in ``TaxCalculator``.
+        formatted based on the rules defined in `TaxCalculator`.
 
         Parameters
         ----------
-        price : `Decimal`
+        price : Decimal
             Price of the purchased item. Must be greater than zero.
-        tax : `Decimal`
+        tax : Decimal
             Sales tax, which will be used in the tax-calculation.
         cnt : int
             Amount of the purchased item.
 
         Returns
         -------
-        `Decimal`
+        Decimal
             Calculated and formatted sales taxes.
 
         Notes
         -----
-            The taxes are rounded similar to the``round(20 * total) / 20``
+            The taxes are rounded similar to the ``round(20 * total) / 20``
             approach and only print two decimal places.
         """
         decimal.getcontext().rounding = decimal.ROUND_HALF_UP
@@ -97,12 +97,12 @@ class TaxCalculator:
 
         Parameters
         ----------
-        p_item: `PurchasedItem`
+        p_item: PurchasedItem
             Purchased item.
 
         Returns
         -------
-        `Decimal`
+        Decimal
             Calculated and formatted sales taxes for the purchased item ``p_item``.
         """
         abs_price: Decimal = abs(p_item.price)
@@ -121,7 +121,7 @@ class TaxCalculator:
 
         Parameters
         ----------
-        tax : `float`
+        tax : float
             New value for the import sales taxes.
         """
         self.__taxes = (Decimal(str(tax)), self.__taxes[1], self.__taxes[2])
@@ -132,7 +132,7 @@ class TaxCalculator:
 
         Parameters
         ----------
-        tax : `float`
+        tax : float
             New value for the basic sales taxes.
         """
         self.__taxes = (self.__taxes[0], Decimal(str(tax)), self.__taxes[2])
