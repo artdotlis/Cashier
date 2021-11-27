@@ -7,7 +7,7 @@ from src.cashier.purchase.container import PurchasedItem
 from src.cashier.purchase.tax_calculator import TaxCalculator
 
 
-pytest_plugins = ("test.unit.fixture.fix_taxes",)
+pytest_plugins = ("tests.unit.fixture.fix_taxes",)
 
 
 def _p_it_cr(item_i: int, price: Decimal, cnt: int, imp: bool, tax: bool) -> PurchasedItem:
