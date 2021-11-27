@@ -11,13 +11,7 @@ from src.cashier.purchase.container import PurchasedItem
 
 @final
 class OutFormatter:
-    """
-    Formats the output of a purchase.
-
-    Notes
-    -----
-        ``OutFormatter`` is a ``@final`` class and thus should not be used as a superclass.
-    """
+    """Formats the output of a purchase."""
     def __init__(self, total: str, sales_taxes: str, imported: str, /) -> None:
         """
         Parameters
@@ -99,13 +93,7 @@ _DI_IMPORTED: Final[Pattern[str]] = re.compile(r"^(?:.*?\s)?imported(?:\s.*)?$")
 
 @final
 class InFormatter:
-    """
-    Formats the input of a possible purchase.
-
-    Notes
-    -----
-        ``InFormatter`` is a ``@final`` class and thus should not be used as a superclass.
-    """
+    """Formats the input of a possible purchase."""
     def __init__(
             self, term_str: str, buy_str: str,
             taxed_f: Callable[[str], bool], /

@@ -10,13 +10,7 @@ from src.cashier.purchase.tax_calculator import TaxCalculator
 
 @final
 class Bill:
-    """
-    A container holding all purchased item.
-
-    Notes
-    -----
-        ``Bill`` is ``@final`` and should not be used as a superclass.
-    """
+    """A container holding all purchased item."""
     def __init__(self, formatter: OutFormatter, tax_calc: TaxCalculator, /) -> None:
         """
         Parameters

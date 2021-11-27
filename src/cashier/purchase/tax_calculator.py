@@ -9,13 +9,7 @@ from src.cashier.purchase.container import PurchasedItem
 
 @final
 class TaxCalculator:
-    """
-    Calculates sales taxes for a purchased item.
-
-    Notes
-    -----
-        ``TaxCalculator`` is a ``@final`` class and thus should not be used as a superclass.
-    """
+    """Calculates sales taxes for a purchased item."""
     def __init__(self, import_taxes: float, normal_taxes: float, /) -> None:
         """
         Parameters
