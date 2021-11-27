@@ -2,7 +2,7 @@
 import pytest
 
 from src.cashier.purchase.formatter import OutFormatter, InFormatter
-from src.cashier.registrer import get_default_out, get_default_terms
+from src.cashier.register import get_default_out, get_default_terms
 
 
 @pytest.fixture

@@ -4,7 +4,7 @@ from decimal import Decimal
 import pytest
 
 from src.cashier.purchase.container import PurchasedItem
-from src.cashier.registrer import get_default_terms, get_default_out
+from src.cashier.register import get_default_terms, get_default_out
 
 
 pytest_plugins = ("test.unit.fixture.fix_formatter",)
