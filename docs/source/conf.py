@@ -22,7 +22,6 @@ release = 'v0.1.0'
 
 extensions = [
     "numpydoc",
-    "sphinx_rtd_theme",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.viewcode",
