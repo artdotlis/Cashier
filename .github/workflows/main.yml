@@ -3,7 +3,7 @@ name: main
 on:
   pull_request:
   push:
-    branches: [ sphinx ]
+    branches: [ master ]
   release:
     types: [ created ]
 
