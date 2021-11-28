@@ -6,7 +6,10 @@ import pytest
 from src.cashier.purchase.bill import Bill
 from src.cashier.purchase.container import PurchasedItem
 
-pytest_plugins = ("tests.unit.fixture.fix_formatter", "tests.unit.fixture.fix_taxes")
+pytest_plugins = (
+    "tests.unit.fixture.test_fix_formatter",
+    "tests.unit.fixture.test_fix_taxes"
+)
 
 
 @pytest.fixture

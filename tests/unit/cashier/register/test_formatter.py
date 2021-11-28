@@ -7,7 +7,7 @@ from src.cashier.purchase.container import PurchasedItem
 from src.cashier.register import get_default_terms, get_default_out
 
 
-pytest_plugins = ("tests.unit.fixture.fix_formatter",)
+pytest_plugins = ("tests.unit.fixture.test_fix_formatter",)
 
 
 @pytest.fixture
