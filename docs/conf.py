@@ -2,7 +2,7 @@
 import sys
 from pathlib import Path
 
-_ABS_CASH = Path(".").absolute().parent.parent
+_ABS_CASH = Path(".").absolute().parent
 _ABS_SRC = str(_ABS_CASH.joinpath("src"))
 sys.path.insert(0, str(_ABS_CASH))
 sys.path.insert(0, _ABS_SRC)
