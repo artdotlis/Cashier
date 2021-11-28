@@ -2,7 +2,7 @@
 import sys
 from pathlib import Path
 
-from src.cashier.version import VERSION
+from src.cashier.version import get_version
 
 
 sys.path.insert(
@@ -71,7 +71,7 @@ autosummary_generate = True
 
 # -- Options for autodoc -------------------------------------------------------
 
-autoclass_content = "both"
+autoclass_content = "class"
 autodoc_class_signature = "mixed"
 autodoc_typehints = "signature"
 autodoc_typehints_description_target = "all"
@@ -90,7 +90,7 @@ html_theme_options = {
       }
   ]
 }
-html_title = f"Cashier {VERSION} documentation"
+html_title = f"Cashier {get_version()} documentation"
 html_static_path = ['_static']
 master_doc = "index"
 html_use_modindex = True
