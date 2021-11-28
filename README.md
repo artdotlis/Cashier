@@ -2,6 +2,7 @@
 
 [![release: v0.1.0](https://img.shields.io/badge/rel-v0.1.0-blue.svg)](https://github.com/arturOnRails/Cashier)
 [![main](https://github.com/arturOnRails/Cashier/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/arturOnRails/Cashier/actions/workflows/main.yml)
+[![Documentation Status](https://readthedocs.org/projects/cashier/badge/?version=latest)](https://cashier.readthedocs.io/?badge=latest)
 
 **Cashier** is a simple library meant for trying out DevOps tools.
 It provides a simple, user interactive shopping simulations.
