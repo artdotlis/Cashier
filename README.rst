@@ -1,7 +1,7 @@
 Cashier
 =======
 
-|release: v0.1.0| |main-workflow|
+|release: v0.1.0| |main|
 
 **Cashier** is a simple library meant for trying out DevOps tools. It
 provides a simple, user interactive shopping simulations. The user is
@@ -64,5 +64,5 @@ dependencies:
 
 .. |release: v0.1.0| image:: https://img.shields.io/badge/rel-v0.1.0-blue.svg
    :target: https://github.com/arturOnRails/Cashier
-.. |main-workflow| image:: https://github.com/arturOnRails/Cashier/actions/workflows/main.yml/badge.svg
-   :target: https://github.com/arturOnRails/Cashier/actions
+.. |main| image:: https://github.com/arturOnRails/Cashier/actions/workflows/main.yml/badge.svg?branch=master
+   :target: https://github.com/arturOnRails/Cashier/actions/workflows/main.yml
