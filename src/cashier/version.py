@@ -3,7 +3,7 @@
 from typing import Final
 
 
-_VERSION: Final[str] = "0.1.0"
+_VERSION: Final[str] = "0.2.0-alpha"
 
 
 def get_version() -> str:
