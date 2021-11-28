@@ -1,0 +1,58 @@
+# based on:
+# https://codecalamity.com/pre-commit-check-yourself-before-you-wreck-yourself/
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+
+    # Identify invalid files
+    - id: check-ast
+    - id: check-yaml
+    - id: check-json
+    - id: check-toml
+
+        # git checks
+    - id: check-merge-conflict
+    - id: check-added-large-files
+      exclude: tests/media/.+
+    - id: detect-private-key
+    - id: check-case-conflict
+
+    # Python checks
+    - id: check-docstring-first
+    - id: debug-statements
+    - id: requirements-txt-fixer
+    - id: fix-encoding-pragma
+    - id: fix-byte-order-marker
+    - id: name-tests-test
+      args: [--django]
+
+    # General quality checks
+    - id: mixed-line-ending
+    - id: trailing-whitespace
+      args: [--markdown-linebreak-ext=md]
+    - id: end-of-file-fixer
+
+  # python formatter
+  - repo: https://github.com/psf/black
+    rev: 21.11b1
+    hooks:
+    - id: black
+
+  # python imports
+  - repo: https://github.com/asottile/reorder_python_imports
+    rev: v2.6.0
+    hooks:
+      - id: reorder-python-imports
+
+  # new python style
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.29.1
+    hooks:
+    -   id: pyupgrade
+
+  # checks setup.cfg
+  - repo: https://github.com/asottile/setup-cfg-fmt
+    rev: v1.20.0
+    hooks:
+      - id: setup-cfg-fmt
