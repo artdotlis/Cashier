@@ -52,7 +52,7 @@ Quickstart with default values:
 $ cashier
 ```
 
-### Development
+## Development
 
 Building docs requires a linux distribution
 and the following dependencies:
