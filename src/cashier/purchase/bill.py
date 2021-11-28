@@ -43,10 +43,14 @@ class Bill:
             Sum of all item prices and their sales taxes.
         """
         sales_taxes: Decimal = Decimal(str(sum(self.__taxes.values())))
-        total: Decimal = Decimal(str(sum(
-            item_v.price * item_v.cnt + self.__taxes[item_k]
-            for item_k, item_v in self.__items.items()
-        )))
+        total: Decimal = Decimal(
+            str(
+                sum(
+                    item_v.price * item_v.cnt + self.__taxes[item_k]
+                    for item_k, item_v in self.__items.items()
+                )
+            )
+        )
         return sales_taxes, total
 
     def _format_item_list(self) -> Iterable[str]:
@@ -102,7 +106,7 @@ class Bill:
         """
         if not self.__items:
             return False, ""
-        return True, '\n'.join(self._join_generator())
+        return True, "\n".join(self._join_generator())
 
     def add_item(self, p_item: PurchasedItem, /) -> str:
         """
@@ -119,8 +123,10 @@ class Bill:
             Description for the adding action.
         """
         if self.__item_id_gen >= self.__max_id:
-            return f"the amount of items [{self.__item_id_gen}]" + \
-                   f" reached max. value ({self.__max_id})"
+            return (
+                f"the amount of items [{self.__item_id_gen}]"
+                + f" reached max. value ({self.__max_id})"
+            )
         if p_item.price <= 0:
             return "the item price can't be negative"
         self.__item_id_gen += 1

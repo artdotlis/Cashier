@@ -79,8 +79,10 @@ class OutFormatter:
         str
             Formatted output string for the purchased item.
         """
-        return f"{p_item.cnt}{' ' + self.__imported if p_item.imported else ''} " \
-               + f"{p_item.name}: {p_item.price + tax_v}"
+        return (
+            f"{p_item.cnt}{' ' + self.__imported if p_item.imported else ''} "
+            + f"{p_item.name}: {p_item.price + tax_v}"
+        )
 
     def __str__(self) -> str:  # pragma: no cover
         """
@@ -91,10 +93,12 @@ class OutFormatter:
         str
             String representation of the ``OutFormatter`` object.
         """
-        return "---\nOUTPUT format:\n" + \
-               f"\t[item cnt] ({self.__imported}) [item name]: [price with taxes]\n" + \
-               f"\t{self.__sales_taxes_pre}: [value]\n" + \
-               f"\t{self.__total_pre}: [value]\n---"
+        return (
+            "---\nOUTPUT format:\n"
+            + f"\t[item cnt] ({self.__imported}) [item name]: [price with taxes]\n"
+            + f"\t{self.__sales_taxes_pre}: [value]\n"
+            + f"\t{self.__total_pre}: [value]\n---"
+        )
 
 
 # default input pattern: check InFormatter.__str__()
@@ -118,8 +122,7 @@ class InFormatter:
     """
 
     def __init__(
-            self, term_str: str, buy_str: str,
-            taxed_f: Callable[[str], bool], /
+        self, term_str: str, buy_str: str, taxed_f: Callable[[str], bool], /
     ) -> None:
         """To initialise the class."""
         super().__init__()
@@ -199,7 +202,7 @@ class InFormatter:
                 f"{match_res.group(3)}{'' if match_res.group(4) is None else match_res.group(4)}"
             ),
             cnt=int(match_res.group(1)),
-            taxed=self.__taxed_f(item_name)
+            taxed=self.__taxed_f(item_name),
         )
 
     def __str__(self) -> str:  # pragma: no cover
@@ -211,8 +214,10 @@ class InFormatter:
         str
             String representation of the ``InFormatter`` object.
         """
-        return "---\nINPUT format:\n" + \
-               f"\tpattern: {_DI_ITEM.pattern}\n" + \
-               "\tsimple input: [item cnt] (imported) [item name] at [price]\n" + \
-               f"\tfinish all purchases: {self.__term_str}\n" + \
-               f"\tstart next purchase: {self.__buy_str}\n---"
+        return (
+            "---\nINPUT format:\n"
+            + f"\tpattern: {_DI_ITEM.pattern}\n"
+            + "\tsimple input: [item cnt] (imported) [item name] at [price]\n"
+            + f"\tfinish all purchases: {self.__term_str}\n"
+            + f"\tstart next purchase: {self.__buy_str}\n---"
+        )

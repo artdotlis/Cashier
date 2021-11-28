@@ -28,12 +28,25 @@ class TaxCalculator:
         self.__multiplier: Decimal = Decimal("2")
         # taxes: imported, normal, none
         self.__taxes: tuple[Decimal, Decimal, Decimal] = (
-            Decimal(str(self.check_taxes(
-                import_taxes, 0.05, "Import sales taxes cant be negative, setting to 0.05."
-            ))),
-            Decimal(str(self.check_taxes(
-                normal_taxes, 0.1, "Basic sales taxes cant be negative, setting to 0.10."
-            ))), Decimal("0")
+            Decimal(
+                str(
+                    self.check_taxes(
+                        import_taxes,
+                        0.05,
+                        "Import sales taxes cant be negative, setting to 0.05.",
+                    )
+                )
+            ),
+            Decimal(
+                str(
+                    self.check_taxes(
+                        normal_taxes,
+                        0.1,
+                        "Basic sales taxes cant be negative, setting to 0.10.",
+                    )
+                )
+            ),
+            Decimal("0"),
         )
 
     @staticmethod
@@ -88,9 +101,9 @@ class TaxCalculator:
             approach and only print two decimal places.
         """
         decimal.getcontext().rounding = decimal.ROUND_HALF_UP
-        taxes: Decimal = (
-                price * tax * self.__multiplier * cnt
-        ).quantize(self.__precision[0]) / self.__multiplier
+        taxes: Decimal = (price * tax * self.__multiplier * cnt).quantize(
+            self.__precision[0]
+        ) / self.__multiplier
         decimal.getcontext().rounding = decimal.ROUND_DOWN
         return taxes.quantize(self.__precision[1])
 
@@ -111,9 +124,7 @@ class TaxCalculator:
         abs_price: Decimal = abs(p_item.price)
         imported_tax: Decimal = self.__taxes[0] if p_item.imported else self.__taxes[2]
         if p_item.taxed:
-            return self._calc_tax(
-                abs_price, self.__taxes[1] + imported_tax, p_item.cnt
-            )
+            return self._calc_tax(abs_price, self.__taxes[1] + imported_tax, p_item.cnt)
         if p_item.imported:
             return self._calc_tax(abs_price, imported_tax, p_item.cnt)
         return self.__taxes[2].quantize(self.__precision[1])
@@ -149,6 +160,8 @@ class TaxCalculator:
         str
             String representation of the ``TaxCalculator`` object.
         """
-        return "---\nTAXES:\n" + \
-               f"\textra import sales tax: {self.__taxes[0]}\n" + \
-               f"\tbasic sales tax: {self.__taxes[1]}\n---"
+        return (
+            "---\nTAXES:\n"
+            + f"\textra import sales tax: {self.__taxes[0]}\n"
+            + f"\tbasic sales tax: {self.__taxes[1]}\n---"
+        )

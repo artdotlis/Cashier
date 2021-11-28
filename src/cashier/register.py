@@ -18,9 +18,12 @@ _DO_SALES_T: Final[str] = "Sales Taxes"
 _DO_IMP: Final[str] = "imported"
 # default tax exemptions
 _D_TAX_E: Final[set[str]] = {
-    "book", "books",
-    "chocolate", "chocolates",
-    "pill", "pills"
+    "book",
+    "books",
+    "chocolate",
+    "chocolates",
+    "pill",
+    "pills",
 }
 
 
@@ -97,6 +100,7 @@ def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:  # pragma: no c
             if item_sub_name in local_set:
                 return False
         return True
+
     return _decide_if_taxed
 
 
@@ -120,7 +124,7 @@ def _read_tax_file(tax_file: None | Path, /) -> set[str]:  # pragma: no cover
     if tax_file is None:
         return set()
     if tax_file.exists() and tax_file.is_file():
-        with tax_file.open('r') as fh_r:
+        with tax_file.open("r") as fh_r:
             return {line.rstrip() for line in fh_r}
     return set()
 
@@ -135,9 +139,7 @@ def start_register(tax_file: None | Path, /) -> None:  # pragma: no cover
         The optional file containing the names of items,
         which omit taxation.
     """
-    in_form = InFormatter(
-        _DI_TERM, _DI_BUY, decide_if_taxed(_read_tax_file(tax_file))
-    )
+    in_form = InFormatter(_DI_TERM, _DI_BUY, decide_if_taxed(_read_tax_file(tax_file)))
     print(str(in_form))
     out_form = OutFormatter(_DO_TOTAL, _DO_SALES_T, _DO_IMP)
     print(str(out_form))
