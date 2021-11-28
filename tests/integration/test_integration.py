@@ -2,9 +2,12 @@
 import pytest
 
 from src.cashier.purchase.bill import Bill
-from src.cashier.purchase.formatter import InFormatter, OutFormatter
-from src.cashier.register import decide_if_taxed, get_default_out, get_default_terms
+from src.cashier.purchase.formatter import InFormatter
+from src.cashier.purchase.formatter import OutFormatter
 from src.cashier.purchase.tax_calculator import TaxCalculator
+from src.cashier.register import decide_if_taxed
+from src.cashier.register import get_default_out
+from src.cashier.register import get_default_terms
 
 
 @pytest.fixture
@@ -30,8 +33,11 @@ def create_output(shared_datadir) -> list[str]:
         return [out_str for line in fh_out if (out_str := line.rstrip())]
 
 
-def _parse_input(bill_list: list[Bill], input_str: str,
-                 state: tuple[InFormatter, OutFormatter, TaxCalculator]) -> bool:
+def _parse_input(
+    bill_list: list[Bill],
+    input_str: str,
+    state: tuple[InFormatter, OutFormatter, TaxCalculator],
+) -> bool:
     in_form, out_form, tax_calc = state[0], state[1], state[2]
     if in_form.is_not_term(input_str):
         if in_form.is_not_bought(input_str):
