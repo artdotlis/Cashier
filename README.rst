@@ -1,7 +1,7 @@
 Cashier
 =======
 
-|release: v0.1.0| |pytest|
+|release: v0.1.0| |main-workflow|
 
 **Cashier** is a simple library meant for trying out DevOps tools. It
 provides a simple, user interactive shopping simulations. The user is
@@ -20,8 +20,8 @@ recommended to work in a **conda** environment.
 
 .. code:: shell
 
-    $ conda create -n cashier python=3.10
-    $ conda activate cashier
+   $ conda create -n cashier python=3.10
+   $ conda activate cashier
 
 Install from GitHub
 ~~~~~~~~~~~~~~~~~~~
@@ -30,13 +30,13 @@ Latest
 
 .. code:: shell
 
-    $ pip install git+https://github.com/arturOnRails/Cashier.git
+   $ pip install git+https://github.com/arturOnRails/Cashier.git
 
 Specific release
 
 .. code:: shell
 
-    $ pip install git+https://github.com/arturOnRails/Cashier.git@<TAG>#egg=Cashier
+   $ pip install git+https://github.com/arturOnRails/Cashier.git@<TAG>#egg=Cashier
 
 Usage
 -----
@@ -45,15 +45,24 @@ For more information use:
 
 .. code:: shell
 
-    $ cashier -h
+   $ cashier -h
 
 Quickstart with default values:
 
 .. code:: shell
 
-    $ cashier
+   $ cashier
+
+Development
+~~~~~~~~~~~
+
+Building docs requires a linux distribution and the following
+dependencies:
+
+-  make
+-  pandoc
 
 .. |release: v0.1.0| image:: https://img.shields.io/badge/rel-v0.1.0-blue.svg
    :target: https://github.com/arturOnRails/Cashier
-.. |pytest| image:: https://github.com/arturOnRails/Cashier/actions/workflows/pytest.yml/badge.svg
+.. |main-workflow| image:: https://github.com/arturOnRails/Cashier/actions/workflows/main.yml/badge.svg
    :target: https://github.com/arturOnRails/Cashier/actions
