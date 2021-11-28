@@ -1,7 +1,7 @@
 Cashier
 =======
 
-|release: v0.1.0| |main|
+|release: v0.1.0| |main| |Documentation Status|
 
 **Cashier** is a simple library meant for trying out DevOps tools. It
 provides a simple, user interactive shopping simulations. The user is
@@ -66,3 +66,5 @@ dependencies:
    :target: https://github.com/arturOnRails/Cashier
 .. |main| image:: https://github.com/arturOnRails/Cashier/actions/workflows/main.yml/badge.svg?branch=master
    :target: https://github.com/arturOnRails/Cashier/actions/workflows/main.yml
+.. |Documentation Status| image:: https://readthedocs.org/projects/cashier/badge/?version=latest
+   :target: https://cashier.readthedocs.io/?badge=latest
