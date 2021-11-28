@@ -26,7 +26,7 @@ _D_TAX_E: Final[set[str]] = {
 
 def get_default_terms() -> tuple[str, str]:
     """
-    Returns private default values.
+    To return private default values.
 
     Returns
     -------
@@ -40,7 +40,7 @@ def get_default_terms() -> tuple[str, str]:
 
 def get_default_out() -> tuple[str, str, str]:
     """
-    Returns private default values.
+    To return private default values.
 
     Returns
     -------
@@ -56,7 +56,7 @@ def get_default_out() -> tuple[str, str, str]:
 
 def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:  # pragma: no cover
     """
-    Creates an decider function for omitting taxation.
+    To create an decider function for omitting taxation.
 
     Parameters
     ----------
@@ -77,7 +77,7 @@ def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:  # pragma: no c
 
     def _decide_if_taxed(in_str: str, /) -> bool:
         """
-        Checks whether an item is taxed or not.
+        To check whether an item is taxed or not.
 
         A very simple function, which look up the item in a
         given set. This set contains all item names, which should omitted
@@ -102,7 +102,7 @@ def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:  # pragma: no c
 
 def _read_tax_file(tax_file: None | Path, /) -> set[str]:  # pragma: no cover
     """
-    Creates a set with all item names, which should not be taxed.
+    To create a set with all item names, which should not be taxed.
 
     The file should contain one name per line.
 
@@ -127,7 +127,7 @@ def _read_tax_file(tax_file: None | Path, /) -> set[str]:  # pragma: no cover
 
 def start_register(tax_file: None | Path, /) -> None:  # pragma: no cover
     """
-    Starts the software.
+    To start the software.
 
     Parameters
     ----------

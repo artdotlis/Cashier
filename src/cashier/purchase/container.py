@@ -9,6 +9,7 @@ from typing import final
 @dataclass
 class PurchasedItem:
     """A container describing the purchased item."""
+
     imported: bool
     """Whether the item is imported or not."""
     name: str

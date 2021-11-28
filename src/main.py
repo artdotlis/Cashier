@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-"""main function"""
+"""Main function."""
 import argparse
 import sys
 
 from src.cashier.register import start_register
-from src.cashier.version import VERSION
+from src.cashier.version import get_version
 
 
 def main() -> None:
     """
-    The main function.
+    To start the purchase simulation.
 
     Analyses the given arguments and starts the software.
     """
@@ -17,7 +17,7 @@ def main() -> None:
         prog='cashier',
         description="A library for calculating sales taxes for purchased items."
     )
-    arg_parser.add_argument('--version', action='version', version=VERSION)
+    arg_parser.add_argument('--version', action='version', version=get_version())
     arg_parser.add_argument(
         '-i', '--input',
         action='store',

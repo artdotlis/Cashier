@@ -10,16 +10,19 @@ from src.cashier.purchase.tax_calculator import TaxCalculator
 
 @final
 class Bill:
-    """A container holding all purchased item."""
+    """
+    A container holding all purchased item.
+
+    Parameters
+    ----------
+    formatter : OutFormatter
+        The formatter used for creating the output of the current purchase.
+    tax_calc : TaxCalculator
+        The calculator for the sales taxes.
+    """
+
     def __init__(self, formatter: OutFormatter, tax_calc: TaxCalculator, /) -> None:
-        """
-        Parameters
-        ----------
-        formatter : OutFormatter
-            The formatter used for creating the output of the current purchase.
-        tax_calc : TaxCalculator
-            The calculator for the sales taxes.
-        """
+        """To initialise the class."""
         super().__init__()
         self.__taxes: dict[int, Decimal] = {}
         self.__items: dict[int, PurchasedItem] = {}
@@ -30,7 +33,7 @@ class Bill:
 
     def _calc_total(self) -> tuple[Decimal, Decimal]:
         """
-        Calculates the sum of all sales taxes and item prices.
+        To calculate the sum of all sales taxes and item prices.
 
         Returns
         -------
@@ -48,7 +51,7 @@ class Bill:
 
     def _format_item_list(self) -> Iterable[str]:
         """
-        A generator creating the output of an item.
+        To iteratively generate the output of an item.
 
         Yields
         ------
@@ -60,7 +63,7 @@ class Bill:
 
     def _format_price(self) -> Iterable[str]:
         """
-        A generator, which sums up the whole purchase.
+        To iteratively sum up the whole purchase.
 
         Yields
         ------
@@ -74,7 +77,7 @@ class Bill:
 
     def _join_generator(self) -> Iterable[str]:
         """
-        A generator creating the output for the whole purchase.
+        To iteratively generate the output for the whole purchase.
 
         Yields
         ------
@@ -88,7 +91,7 @@ class Bill:
 
     def finish(self) -> tuple[bool, str]:
         """
-        Finishes the current purchase.
+        To finish the current purchase.
 
         Returns
         -------
@@ -103,7 +106,7 @@ class Bill:
 
     def add_item(self, p_item: PurchasedItem, /) -> str:
         """
-        Adds an item to the current purchase.
+        To add an item to the current purchase.
 
         Parameters
         ----------
@@ -127,7 +130,7 @@ class Bill:
 
     def rem_item(self, item_id: int, /) -> bool:
         """
-        Removes an item based on its id from the current purchase.
+        To remove an item based on its id from the current purchase.
 
         Parameters
         ----------
