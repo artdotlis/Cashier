@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """A module providing input and output formatters."""
 import re
-from re import Pattern
-from decimal import Decimal
 from collections.abc import Callable
-from typing import final, Final
+from decimal import Decimal
+from re import Pattern
+from typing import Final
+from typing import final
 
 from src.cashier.purchase.container import PurchasedItem
 

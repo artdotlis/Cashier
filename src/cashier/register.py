@@ -5,7 +5,8 @@ from pathlib import Path
 from typing import Final
 
 from src.cashier.purchase.bill import Bill
-from src.cashier.purchase.formatter import InFormatter, OutFormatter
+from src.cashier.purchase.formatter import InFormatter
+from src.cashier.purchase.formatter import OutFormatter
 from src.cashier.purchase.tax_calculator import TaxCalculator
 
 
