@@ -2,10 +2,13 @@
 import sys
 from pathlib import Path
 
-from src.cashier.version import get_version
+_ABS_CASH = Path(".").absolute().parent.parent
+_ABS_SRC = str(_ABS_CASH.joinpath("src"))
+sys.path.insert(0, str(_ABS_CASH))
+sys.path.insert(0, _ABS_SRC)
 
 
-sys.path.insert(0, str(Path(".").absolute().parent.parent.joinpath("src")))
+cashier_version = __import__("src.cashier.version", fromlist=["get_version"])
 
 
 # -- Project information -------------------------------------------------------
@@ -91,7 +94,7 @@ html_theme_options = {
         }
     ]
 }
-html_title = f"Cashier {get_version()} documentation"
+html_title = f"Cashier {cashier_version.get_version()} documentation"
 html_static_path = ["_static"]
 master_doc = "index"
 html_use_modindex = True
