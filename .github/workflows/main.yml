@@ -8,12 +8,12 @@ on:
     types: [ created ]
 
 jobs:
-  main_test:
+  mac_win_test:
     strategy:
       fail-fast: false
       matrix:
         python-version: [ "3.10" ]
-        os: [ windows-latest, ubunut-20.04, macos-latest ]
+        os: [ windows-latest, macos-latest ]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -27,12 +27,12 @@ jobs:
       - name: tox test
         run: |
           tox -e py
-  lint:
+  lin_lint:
     strategy:
       fail-fast: false
       matrix:
         python-version: [ "3.10" ]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
