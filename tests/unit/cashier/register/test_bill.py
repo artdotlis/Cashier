@@ -8,7 +8,7 @@ from src.cashier.purchase.container import PurchasedItem
 
 pytest_plugins = (
     "tests.unit.fixture.test_fix_formatter",
-    "tests.unit.fixture.test_fix_taxes"
+    "tests.unit.fixture.test_fix_taxes",
 )
 
 
@@ -20,32 +20,59 @@ def bill(tax_calc, out_formatter) -> Bill:
 @pytest.fixture
 def add_act() -> list[tuple[PurchasedItem, int, str, bool]]:
     return [
-        (PurchasedItem(imported=True, name="i0", price=Decimal("1"), cnt=1, taxed=True),
-         1, "added item (id: 1) successfully", True),
-        (PurchasedItem(imported=True, name="i0", price=Decimal("1"), cnt=1, taxed=True),
-         0, "the amount of items [0] reached max. value (0)", False),
-        (PurchasedItem(imported=True, name="i0", price=Decimal("-1"), cnt=1, taxed=True),
-         1, "the item price can't be negative", False),
+        (
+            PurchasedItem(
+                imported=True, name="i0", price=Decimal("1"), cnt=1, taxed=True
+            ),
+            1,
+            "added item (id: 1) successfully",
+            True,
+        ),
+        (
+            PurchasedItem(
+                imported=True, name="i0", price=Decimal("1"), cnt=1, taxed=True
+            ),
+            0,
+            "the amount of items [0] reached max. value (0)",
+            False,
+        ),
+        (
+            PurchasedItem(
+                imported=True, name="i0", price=Decimal("-1"), cnt=1, taxed=True
+            ),
+            1,
+            "the item price can't be negative",
+            False,
+        ),
     ]
 
 
 @pytest.fixture
 def fin_container(bill) -> tuple[Bill, str]:
     items = [
-        PurchasedItem(imported=False, name="book",
-                      price=Decimal("12.49"), cnt=1, taxed=False),
-        PurchasedItem(imported=False, name="music CD",
-                      price=Decimal("14.99"), cnt=1, taxed=True),
-        PurchasedItem(imported=False, name="chocolate bar",
-                      price=Decimal("0.85"), cnt=1, taxed=False)
+        PurchasedItem(
+            imported=False, name="book", price=Decimal("12.49"), cnt=1, taxed=False
+        ),
+        PurchasedItem(
+            imported=False, name="music CD", price=Decimal("14.99"), cnt=1, taxed=True
+        ),
+        PurchasedItem(
+            imported=False,
+            name="chocolate bar",
+            price=Decimal("0.85"),
+            cnt=1,
+            taxed=False,
+        ),
     ]
-    output = "\n".join([
-        "1 book: 12.49",
-        "1 music CD: 16.49",
-        "1 chocolate bar: 0.85",
-        "Sales Taxes: 1.50",
-        "Total: 29.83"
-    ])
+    output = "\n".join(
+        [
+            "1 book: 12.49",
+            "1 music CD: 16.49",
+            "1 chocolate bar: 0.85",
+            "Sales Taxes: 1.50",
+            "Total: 29.83",
+        ]
+    )
     for item_i in items:
         bill.add_item(item_i)
     return bill, output
@@ -60,4 +87,4 @@ class TestBill:
             bill._Bill__item_id_gen = 0
 
     def test_finish(self, fin_container):
-        assert ''.join(fin_container[0].finish()[1]) == fin_container[1]
+        assert "".join(fin_container[0].finish()[1]) == fin_container[1]
