@@ -11,18 +11,21 @@ from src.cashier.purchase.container import PurchasedItem
 
 @final
 class OutFormatter:
-    """Formats the output of a purchase."""
+    """
+    Formats the output of a purchase.
+
+    Parameters
+    ----------
+    total : str
+        The prefix for the total price of an item.
+    sales_taxes : str
+        The prefix for the sales taxes output.
+    imported : str
+        The string used as the imported description for an items.
+    """
+
     def __init__(self, total: str, sales_taxes: str, imported: str, /) -> None:
-        """
-        Parameters
-        ----------
-        total : str
-            The prefix for the total price of an item.
-        sales_taxes : str
-            The prefix for the sales taxes output.
-        imported : str
-            The string used as the imported description for an items.
-        """
+        """To initialise the class."""
         super().__init__()
         self.__total_pre: str = total
         self.__sales_taxes_pre: str = sales_taxes
@@ -30,7 +33,7 @@ class OutFormatter:
 
     def out_sales_taxes(self, sales_taxes: Decimal, /) -> str:
         """
-        Creates a string for the sales taxes.
+        To create a string for the sales taxes.
 
         Parameters
         ----------
@@ -46,7 +49,7 @@ class OutFormatter:
 
     def out_total(self, total: Decimal, /) -> str:
         """
-        Creates a string for the total price of an purchased item.
+        To create a string for the total price of an purchased item.
 
         Parameters
         ----------
@@ -62,7 +65,7 @@ class OutFormatter:
 
     def out_list_item(self, p_item: PurchasedItem, tax_v: Decimal, /) -> str:
         """
-        Formats a purchased item.
+        To format a purchased item.
 
         Parameters
         ----------
@@ -80,6 +83,14 @@ class OutFormatter:
                + f"{p_item.name}: {p_item.price + tax_v}"
 
     def __str__(self) -> str:  # pragma: no cover
+        """
+        To create a string representation.
+
+        Returns
+        -------
+        str
+            String representation of the ``OutFormatter`` object.
+        """
         return "---\nOUTPUT format:\n" + \
                f"\t[item cnt] ({self.__imported}) [item name]: [price with taxes]\n" + \
                f"\t{self.__sales_taxes_pre}: [value]\n" + \
@@ -93,21 +104,24 @@ _DI_IMPORTED: Final[Pattern[str]] = re.compile(r"^(?:.*?\s)?imported(?:\s.*)?$")
 
 @final
 class InFormatter:
-    """Formats the input of a possible purchase."""
+    """
+    Formats the input of a possible purchase.
+
+    Parameters
+    ----------
+    term_str : str
+        The input string, which terminates all ongoing purchases.
+    buy_str : str
+        The input string, which terminates the current ongoing purchase.
+    taxed_f : Callable [[ str ], bool ]
+        Function, which decides whether the basic taxes apply to a given item.
+    """
+
     def __init__(
             self, term_str: str, buy_str: str,
             taxed_f: Callable[[str], bool], /
     ) -> None:
-        """
-        Parameters
-        ----------
-        term_str : str
-            The input string, which terminates all ongoing purchases.
-        buy_str : str
-            The input string, which terminates the current ongoing purchase.
-        taxed_f : Callable [[ str ], bool ]
-            Function, which decides whether the basic taxes apply to a given item.
-        """
+        """To initialise the class."""
         super().__init__()
         self.__term_str: str = term_str
         self.__buy_str: str = buy_str
@@ -115,7 +129,7 @@ class InFormatter:
 
     def is_not_term(self, in_str: str, /) -> bool:
         """
-        Determines based on input whether all purchases should be concluded.
+        To determine based on input whether all purchases should be concluded.
 
         This function returns False if all the purchases should be concluded
         otherwise it returns True.
@@ -134,7 +148,7 @@ class InFormatter:
 
     def is_not_bought(self, in_str: str, /) -> bool:
         """
-        Determines based on input whether to stop the current purchase.
+        To determine based on input whether to stop the current purchase.
 
         This function returns False  if the current purchase should be concluded
         otherwise it returns True.
@@ -153,7 +167,7 @@ class InFormatter:
 
     def analyse_input(self, in_str: str, /) -> tuple[bool, None | PurchasedItem]:
         """
-        Analyses an input string.
+        To analyse an input string.
 
         This function first checks whether the input string has a valid format,
         If successful, it creates a `PurchasedItem` object based on the input.
@@ -189,6 +203,14 @@ class InFormatter:
         )
 
     def __str__(self) -> str:  # pragma: no cover
+        """
+        To create a string representation.
+
+        Returns
+        -------
+        str
+            String representation of the ``InFormatter`` object.
+        """
         return "---\nINPUT format:\n" + \
                f"\tpattern: {_DI_ITEM.pattern}\n" + \
                "\tsimple input: [item cnt] (imported) [item name] at [price]\n" + \

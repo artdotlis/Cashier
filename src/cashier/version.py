@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
-"""library version"""
+"""Library version."""
 from typing import Final
 
-VERSION: Final[str] = "0.1.0"
-"""Global library version constant."""
+
+_VERSION: Final[str] = "0.1.0"
+
+
+def get_version() -> str:
+    """To return the global version constant."""
+    return _VERSION

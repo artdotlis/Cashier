@@ -9,16 +9,19 @@ from src.cashier.purchase.container import PurchasedItem
 
 @final
 class TaxCalculator:
-    """Calculates sales taxes for a purchased item."""
+    """
+    Calculates sales taxes for a purchased item.
+
+    Parameters
+    ----------
+    import_taxes : float
+        Sales taxes for imported items.
+    normal_taxes : float
+        Basic sales taxes.
+    """
+
     def __init__(self, import_taxes: float, normal_taxes: float, /) -> None:
-        """
-        Parameters
-        ----------
-        import_taxes : float
-            Sales taxes for imported items.
-        normal_taxes : float
-            Basic sales taxes.
-        """
+        """To initialise the class."""
         super().__init__()
         # precision for: one decimal place, two decimal places
         self.__precision: tuple[Decimal, Decimal] = (Decimal("0.0"), Decimal("0.00"))
@@ -36,7 +39,7 @@ class TaxCalculator:
     @staticmethod
     def check_taxes(tax: float, default_t: float, msg: str, /) -> float:
         """
-        Checks whether the given tax is negative.
+        To check whether the given tax is negative.
 
         Parameters
         ----------
@@ -59,7 +62,7 @@ class TaxCalculator:
 
     def _calc_tax(self, price: Decimal, tax: Decimal, cnt: int, /) -> Decimal:
         """
-        Calculates sales taxes.
+        To calculate sales taxes.
 
         This method returns the sales tax for ``cnt`` items
         with the same ``price``. The sales tax value is rounder and
@@ -93,7 +96,7 @@ class TaxCalculator:
 
     def tax(self, p_item: PurchasedItem, /) -> Decimal:
         """
-        Calculates sales taxes for a purchased item.
+        To calculate sales taxes for a purchased item.
 
         Parameters
         ----------
@@ -117,7 +120,7 @@ class TaxCalculator:
 
     def new_import_tax(self, tax: float, /) -> None:
         """
-        Sets a new value for the import sales taxes.
+        To set a new value for the import sales taxes.
 
         Parameters
         ----------
@@ -128,7 +131,7 @@ class TaxCalculator:
 
     def new_normal_tax(self, tax: float, /) -> None:
         """
-        Sets a new value for the basic sales taxes.
+        To set a new value for the basic sales taxes.
 
         Parameters
         ----------
@@ -138,6 +141,14 @@ class TaxCalculator:
         self.__taxes = (self.__taxes[0], Decimal(str(tax)), self.__taxes[2])
 
     def __str__(self) -> str:  # pragma: no cover
+        """
+        To create a string representation.
+
+        Returns
+        -------
+        str
+            String representation of the ``TaxCalculator`` object.
+        """
         return "---\nTAXES:\n" + \
                f"\textra import sales tax: {self.__taxes[0]}\n" + \
                f"\tbasic sales tax: {self.__taxes[1]}\n---"
