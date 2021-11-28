@@ -7,5 +7,12 @@ _VERSION: Final[str] = "0.1.0"
 
 
 def get_version() -> str:
-    """To return the global version constant."""
+    """
+    To return the global version constant.
+
+    Returns
+    -------
+    str
+        Global software version.
+    """
     return _VERSION
