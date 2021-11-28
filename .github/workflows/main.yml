@@ -44,4 +44,5 @@ jobs:
           pip install tox virtualenv setuptools
       - name: tox lint
         run: |
-          tox
+          tox -e py
+          if [ ${{ matrix.python-version }} = "3.10" ]; then tox -e pre-commit,mypy,flake8; fi
