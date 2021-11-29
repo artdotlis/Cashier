@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """A module saving and describing a purchase."""
+from collections.abc import Iterable
 from decimal import Decimal
 from typing import final
-from typing import Iterable
 
 from src.cashier.purchase.container import PurchasedItem
 from src.cashier.purchase.formatter import OutFormatter
