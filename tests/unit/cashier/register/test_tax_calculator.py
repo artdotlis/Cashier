@@ -121,3 +121,6 @@ class TestTaxCalculator:
     def test_tax_none(self, tax_calc, no_tax):
         for test_i in no_tax:
             assert str(tax_calc.tax(test_i[0])) == test_i[1]
+
+    def test_str(self, tax_calc):
+        assert isinstance(str(tax_calc), str)

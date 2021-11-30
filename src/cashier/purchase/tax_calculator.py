@@ -151,7 +151,7 @@ class TaxCalculator:
         """
         self.__taxes = (self.__taxes[0], Decimal(str(tax)), self.__taxes[2])
 
-    def __str__(self) -> str:  # pragma: no cover
+    def __str__(self) -> str:
         """
         To create a string representation.
 
