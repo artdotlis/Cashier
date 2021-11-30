@@ -58,7 +58,7 @@ def get_default_out() -> tuple[str, str, str]:
     return _DO_TOTAL, _DO_SALES_T, _DO_IMP
 
 
-def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:  # pragma: no cover
+def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:
     """
     To create an decider function for omitting taxation.
 
@@ -105,7 +105,7 @@ def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:  # pragma: no c
     return _decide_if_taxed
 
 
-def _read_tax_file(tax_file: None | Path, /) -> set[str]:  # pragma: no cover
+def _read_tax_file(tax_file: None | Path, /) -> set[str]:
     """
     To create a set with all item names, which should not be taxed.
 
@@ -124,13 +124,15 @@ def _read_tax_file(tax_file: None | Path, /) -> set[str]:  # pragma: no cover
     """
     if tax_file is None:
         return set()
-    if tax_file.exists() and tax_file.is_file():
+    try:
         with tax_file.open("r") as fh_r:
             return {line.rstrip() for line in fh_r}
+    except IOError as ex_n:
+        print(str(ex_n))
     return set()
 
 
-def start_register(tax_file: None | Path, /) -> None:  # pragma: no cover
+def start_register(tax_file: None | Path, /) -> None:
     """
     To start the software.
 

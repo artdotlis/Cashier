@@ -85,7 +85,7 @@ class OutFormatter:
             + f"{p_item.name}: {p_item.price + tax_v}"
         )
 
-    def __str__(self) -> str:  # pragma: no cover
+    def __str__(self) -> str:
         """
         To create a string representation.
 
@@ -206,7 +206,7 @@ class InFormatter:
             taxed=self.__taxed_f(item_name),
         )
 
-    def __str__(self) -> str:  # pragma: no cover
+    def __str__(self) -> str:
         """
         To create a string representation.
 

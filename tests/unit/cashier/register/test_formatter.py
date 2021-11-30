@@ -49,6 +49,9 @@ class TestOutFormatter:
         for out_i in out_p_item_list:
             assert out_formatter.out_list_item(out_i[0], out_i[1]) == out_i[2]
 
+    def test_str(self, out_formatter):
+        assert isinstance(str(out_formatter), str)
+
 
 @pytest.fixture
 def in_p_item_list() -> list[tuple[str, tuple[bool, None | PurchasedItem]]]:
@@ -125,3 +128,6 @@ class TestInFormatter:
             results = in_formatter.analyse_input(input_i[0])
             assert results[0] == input_i[1][0]
             assert results[1] == input_i[1][1]
+
+    def test_str(self, in_formatter):
+        assert isinstance(str(in_formatter), str)
