@@ -90,7 +90,7 @@ html_theme_options = {
         {
             "name": "GitHub",
             "url": "https://github.com/arturOnRails/Cashier",
-            "icon": "fab fa-github-square",
+            "icon": "fab fa-github",
         }
     ]
 }
