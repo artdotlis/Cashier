@@ -1,8 +1,11 @@
 # Cashier
 
 [![release: v0.1.0](https://img.shields.io/badge/rel-v0.1.0-blue.svg)](https://github.com/arturOnRails/Cashier)
+[![GitHub](https://img.shields.io/github/license/arturOnRails/Cashier)](https://raw.githubusercontent.com/arturOnRails/Cashier/master/LICENSE)
 [![main](https://github.com/arturOnRails/Cashier/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/arturOnRails/Cashier/actions/workflows/main.yml)
 [![Documentation Status](https://readthedocs.org/projects/cashier/badge/?version=latest)](https://cashier.readthedocs.io/?badge=latest)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 
 **Cashier** is a simple library meant for trying out DevOps tools.
 It provides a simple, user interactive shopping simulations.
@@ -59,3 +62,8 @@ and the following dependencies:
 
 - make
 - pandoc
+
+
+## ToDo
+
+- Add new features for the v0.2.0 release

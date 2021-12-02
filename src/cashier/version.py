@@ -3,16 +3,13 @@
 from typing import Final
 
 
-_VERSION: Final[str] = "0.1.0"
+_VERSION: Final[str] = "0.2.0-alpha"
 
 
 def get_version() -> str:
-    """
-    To return the global version constant.
+    """To return the global version constant.
 
-    Returns
-    -------
-    str
+    Returns:
         Global software version.
     """
     return _VERSION
