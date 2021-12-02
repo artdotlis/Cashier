@@ -12,17 +12,12 @@ from src.cashier.purchase.container import PurchasedItem
 
 @final
 class OutFormatter:
-    """
-    Formats the output of a purchase.
+    """Formats the output of a purchase.
 
-    Parameters
-    ----------
-    total : str
-        The prefix for the total price of an item.
-    sales_taxes : str
-        The prefix for the sales taxes output.
-    imported : str
-        The string used as the imported description for an items.
+    Args:
+        total: The prefix for the total price of an item.
+        sales_taxes: The prefix for the sales taxes output.
+        imported: The string used as the imported description for an items.
     """
 
     def __init__(self, total: str, sales_taxes: str, imported: str, /) -> None:
@@ -33,51 +28,35 @@ class OutFormatter:
         self.__imported: str = imported
 
     def out_sales_taxes(self, sales_taxes: Decimal, /) -> str:
-        """
-        To create a string for the sales taxes.
+        """To create a string for the sales taxes.
 
-        Parameters
-        ----------
-        sales_taxes : Decimal
-            The sales taxes value used for all purchased item.
+        Args:
+            sales_taxes: The sales taxes value used for all purchased item.
 
-        Returns
-        -------
-        str
+        Returns:
             Formatted output string for the sales taxes.
         """
         return f"{self.__sales_taxes_pre}: {sales_taxes}"
 
     def out_total(self, total: Decimal, /) -> str:
-        """
-        To create a string for the total price of an purchased item.
+        """To create a string for the total price of an purchased item.
 
-        Parameters
-        ----------
-        total : Decimal
-            The sum of all prices of the purchased items and their sales taxes.
+        Args:
+            total: The sum of all prices of the purchased items and their sales taxes.
 
-        Returns
-        -------
-        str
+        Returns:
             Formatted output string for the total price of the purchase.
         """
         return f"{self.__total_pre}: {total}"
 
     def out_list_item(self, p_item: PurchasedItem, tax_v: Decimal, /) -> str:
-        """
-        To format a purchased item.
+        """To format a purchased item.
 
-        Parameters
-        ----------
-        p_item : PurchasedItem
-            The purchased item.
-        tax_v : Decimal
-            The sales taxes value used for the purchased item.
+        Args:
+            p_item: The purchased item.
+            tax_v: The sales taxes value used for the purchased item.
 
-        Returns
-        -------
-        str
+        Returns:
             Formatted output string for the purchased item.
         """
         return (
@@ -86,12 +65,9 @@ class OutFormatter:
         )
 
     def __str__(self) -> str:
-        """
-        To create a string representation.
+        """To create a string representation.
 
-        Returns
-        -------
-        str
+        Returns:
             String representation of the ``OutFormatter`` object.
         """
         return (
@@ -109,17 +85,12 @@ _DI_IMPORTED: Final[Pattern[str]] = re.compile(r"^(?:.*?\s)?imported(?:\s.*)?$")
 
 @final
 class InFormatter:
-    """
-    Formats the input of a possible purchase.
+    """Formats the input of a possible purchase.
 
-    Parameters
-    ----------
-    term_str : str
-        The input string, which terminates all ongoing purchases.
-    buy_str : str
-        The input string, which terminates the current ongoing purchase.
-    taxed_f : Callable [[ str ], bool ]
-        Function, which decides whether the basic taxes apply to a given item.
+    Args:
+        term_str: The input string, which terminates all ongoing purchases.
+        buy_str: The input string, which terminates the current ongoing purchase.
+        taxed_f: Function, which decides whether the basic taxes apply to a given item.
     """
 
     def __init__(
@@ -132,61 +103,45 @@ class InFormatter:
         self.__taxed_f: Callable[[str], bool] = taxed_f
 
     def is_not_term(self, in_str: str, /) -> bool:
-        """
-        To determine based on input whether all purchases should be concluded.
+        """To determine based on input whether all purchases should be concluded.
 
         This function returns False if all the purchases should be concluded
         otherwise it returns True.
 
-        Parameters
-        ----------
-        in_str : str
-            The input string, which should be analyzed.
+        Args:
+            in_str: The input string, which should be analyzed.
 
-        Returns
-        -------
-        bool
+        Returns:
             Whether to continue all purchases.
         """
         return in_str.strip() != self.__term_str
 
     def is_not_bought(self, in_str: str, /) -> bool:
-        """
-        To determine based on input whether to stop the current purchase.
+        """To determine based on input whether to stop the current purchase.
 
         This function returns False  if the current purchase should be concluded
         otherwise it returns True.
 
-        Parameters
-        ----------
-        in_str : str
-            The input string, which should be analyzed.
+        Args:
+            in_str: The input string, which should be analyzed.
 
-        Returns
-        -------
-        bool
+        Returns:
             Whether to continue the current purchase.
         """
         return in_str.strip() != self.__buy_str
 
     def analyse_input(self, in_str: str, /) -> tuple[bool, None | PurchasedItem]:
-        """
-        To analyse an input string.
+        """To analyse an input string.
 
         This function first checks whether the input string has a valid format,
-        If successful, it creates a `PurchasedItem` object based on the input.
+        If successful, it creates a ``PurchasedItem`` object based on the input.
 
-        Parameters
-        ----------
-        in_str : str
-            The input string, which should be analyzed.
+        Args:
+            in_str: The input string, which should be analyzed.
 
-        Returns
-        -------
-        bool
-            Describes whether the input string is valid.
-        None | PurchasedItem
-            Contains either None or `PurchasedItem`.
+        Returns:
+            Returns a boolean and either the ``PurchasedItem`` element if boolean
+            is ``True`` or None otherwise.
         """
         match_res = _DI_ITEM.match(in_str.strip())
         if match_res is None or not match_res.group(2).strip():
@@ -207,12 +162,9 @@ class InFormatter:
         )
 
     def __str__(self) -> str:
-        """
-        To create a string representation.
+        """To create a string representation.
 
-        Returns
-        -------
-        str
+        Returns:
             String representation of the ``InFormatter`` object.
         """
         return (

@@ -8,8 +8,7 @@ from src.cashier.version import get_version
 
 
 def main() -> None:
-    """
-    To start the purchase simulation.
+    """To start the purchase simulation.
 
     Analyses the given arguments and starts the software.
     """

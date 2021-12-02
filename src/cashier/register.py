@@ -29,72 +29,51 @@ _D_TAX_E: Final[set[str]] = {
 
 
 def get_default_terms() -> tuple[str, str]:
-    """
-    To return private default values.
+    """To return private default values.
 
-    Returns
-    -------
-    str
-        Default string for terminating all purchases.
-    str
-        Default string for terminating the current purchases.
+    Returns:
+        Returns two strings. The first describes the default string for terminating all purchases.
+        The second the default string for terminating the current purchases.
     """
     return _DI_TERM, _DI_BUY
 
 
 def get_default_out() -> tuple[str, str, str]:
-    """
-    To return private default values.
+    """To return private default values.
 
-    Returns
-    -------
-    str
-        Default string for describing the purchase price.
-    str
-        Default string for the sum of all sales taxes of the purchase.
-    str
-        Default string for describing an imported item.
+    Returns:
+        Returns three strings. The first describes the default string for describing
+        the purchase price. The second the default string for the sum of all sales
+        taxes of the purchase and the third the default string for describing an imported item.
     """
     return _DO_TOTAL, _DO_SALES_T, _DO_IMP
 
 
 def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:
-    """
-    To create an decider function for omitting taxation.
+    """To create an decider function for omitting taxation.
 
-    Parameters
-    ----------
-    n_taxed : set [ str ]
-        The set containing all items, which should not be taxed.
-        If empty, a default set will be chosen.
+    Args:
+        n_taxed: The set containing all items, which should not be taxed.
+                 If empty, a default set will be chosen.
 
-    Returns
-    -------
-    Callable [[ str ], bool ]
+    Returns:
         Decider function for omitting taxation.
-
-
     """
     local_set = _D_TAX_E
     if n_taxed:
         local_set = n_taxed
 
     def _decide_if_taxed(in_str: str, /) -> bool:
-        """
-        To check whether an item is taxed or not.
+        """To check whether an item is taxed or not.
 
         A very simple function, which look up the item in a
         given set. This set contains all item names, which should omitted
         from taxation.
 
-        Parameters
-        ----------
-        in_str : str
-            The name of the purchased item, which should be checked for taxation.
+        Args:
+            in_str: The name of the purchased item, which should be checked for taxation.
 
-        Returns
-        -------
-        bool
+        Returns:
             Whether the item is taxed or not.
         """
         for item_sub_name in in_str.split(" "):
@@ -106,21 +85,16 @@ def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:
 
 
 def _read_tax_file(tax_file: None | Path, /) -> set[str]:
-    """
-    To create a set with all item names, which should not be taxed.
+    """To create a set with all item names, which should not be taxed.
 
     The file should contain one name per line.
 
-    Parameters
-    ----------
-    tax_file : None | Path
-        The file containing item names, which should not be taxed.
+    Args:
+        tax_file: The file containing item names, which should not be taxed.
 
-    Returns
-    -------
+    Returns:
         All items, which should be not taxed, in a set.
         The set can be empty.
-
     """
     if tax_file is None:
         return set()
@@ -133,14 +107,11 @@ def _read_tax_file(tax_file: None | Path, /) -> set[str]:
 
 
 def start_register(tax_file: None | Path, /) -> None:
-    """
-    To start the software.
+    """To start the software.
 
-    Parameters
-    ----------
-    tax_file : None | Path
-        The optional file containing the names of items,
-        which omit taxation.
+    Args:
+        tax_file: The optional file containing the names of items,
+                  which omit taxation.
     """
     in_form = InFormatter(_DI_TERM, _DI_BUY, decide_if_taxed(_read_tax_file(tax_file)))
     print(str(in_form))
