@@ -62,3 +62,8 @@ and the following dependencies:
 
 - make
 - pandoc
+
+
+## ToDo
+
+- Add new features for the v0.2.0 release

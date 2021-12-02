@@ -63,6 +63,11 @@ dependencies:
 -  make
 -  pandoc
 
+ToDo
+----
+
+-  Add new features for the v0.2.0 release
+
 .. |release: v0.1.0| image:: https://img.shields.io/badge/rel-v0.1.0-blue.svg
    :target: https://github.com/arturOnRails/Cashier
 .. |GitHub| image:: https://img.shields.io/github/license/arturOnRails/Cashier
