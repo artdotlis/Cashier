@@ -103,7 +103,8 @@ html_theme_options = {
     "titles_only": False,
 }
 html_title = f"Cashier v{_VERSION.get_version()}"
-html_static_path = ["_static"]
+# reuse if needed
+# html_static_path = ["_static"]
 master_doc = "index"
 html_use_modindex = True
 html_copy_source = False
