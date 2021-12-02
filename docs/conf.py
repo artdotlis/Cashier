@@ -90,7 +90,6 @@ simplify_optional_unions = True
 # -- Options for HTML output ---------------------------------------------------
 
 html_theme = "sphinx_rtd_theme"
-pygments_style = "monokai"
 html_theme_options = {
     "display_version": True,
     "prev_next_buttons_location": "bottom",
@@ -103,8 +102,13 @@ html_theme_options = {
     "titles_only": False,
 }
 html_title = f"Cashier v{_VERSION.get_version()}"
-# reuse if needed
-# html_static_path = ["_static"]
+html_static_path = ["_static"]
+html_css_files = [
+    "css/custom.css",
+]
+html_js_files = [
+    "js/custom.js",
+]
 master_doc = "index"
 html_use_modindex = True
 html_copy_source = False
