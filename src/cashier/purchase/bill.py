@@ -11,15 +11,11 @@ from src.cashier.purchase.tax_calculator import TaxCalculator
 
 @final
 class Bill:
-    """
-    A container holding all purchased item.
+    """A container holding all purchased item.
 
-    Parameters
-    ----------
-    formatter : OutFormatter
-        The formatter used for creating the output of the current purchase.
-    tax_calc : TaxCalculator
-        The calculator for the sales taxes.
+    Args:
+        formatter: The formatter used for creating the output of the current purchase.
+        tax_calc: The calculator for the sales taxes.
     """
 
     def __init__(self, formatter: OutFormatter, tax_calc: TaxCalculator, /) -> None:
@@ -33,15 +29,11 @@ class Bill:
         self.__bill_format: OutFormatter = formatter
 
     def _calc_total(self) -> tuple[Decimal, Decimal]:
-        """
-        To calculate the sum of all sales taxes and item prices.
+        """To calculate the sum of all sales taxes and item prices.
 
-        Returns
-        -------
-        Decimal
-            Sum of all sales taxes.
-        Decimal
-            Sum of all item prices and their sales taxes.
+        Returns:
+            Returns to sums, the sum of all sales taxes and
+            the sum of all item prices including their sales taxes.
         """
         sales_taxes: Decimal = Decimal(str(sum(self.__taxes.values())))
         total: Decimal = Decimal(
@@ -55,24 +47,18 @@ class Bill:
         return sales_taxes, total
 
     def _format_item_list(self) -> Iterable[str]:
-        """
-        To iteratively generate the output of an item.
+        """To iteratively generate the output of an item.
 
-        Yields
-        ------
-        str
+        Yields:
             A formatted output for a purchased item.
         """
         for item_k, item_v in self.__items.items():
             yield self.__bill_format.out_list_item(item_v, self.__taxes[item_k])
 
     def _format_price(self) -> Iterable[str]:
-        """
-        To iteratively sum up the whole purchase.
+        """To iteratively sum up the whole purchase.
 
-        Yields
-        ------
-        str
+        Yields:
             A part of the formatted output summing up the whole purchase.
             Is either the total sales taxes or the price for the whole purchase.
         """
@@ -81,12 +67,9 @@ class Bill:
         yield self.__bill_format.out_total(total_out[1])
 
     def _join_generator(self) -> Iterable[str]:
-        """
-        To iteratively generate the output for the whole purchase.
+        """To iteratively generate the output for the whole purchase.
 
-        Yields
-        ------
-        str
+        Yields:
             A part of the formatted output for the whole purchase.
         """
         for item_i in self._format_item_list():
@@ -95,32 +78,24 @@ class Bill:
             yield price_i
 
     def finish(self) -> tuple[bool, str]:
-        """
-        To finish the current purchase.
+        """To finish the current purchase.
 
-        Returns
-        -------
-        `bool`
-            Whether the current purchase is empty or not.
-        `str`
-            Description of the whole purchase.
+        Returns:
+            Returns a boolean and a string. The boolean
+            describes whether the current purchase is empty or not and
+            the string is a description of the whole purchase.
         """
         if not self.__items:
             return False, ""
         return True, "\n".join(self._join_generator())
 
     def add_item(self, p_item: PurchasedItem, /) -> str:
-        """
-        To add an item to the current purchase.
+        """To add an item to the current purchase.
 
-        Parameters
-        ----------
-        p_item : PurchasedItem
-            The purchased item to be add.
+        Args:
+            p_item: The purchased item to be add.
 
-        Returns
-        -------
-        str
+        Returns:
             Description for the adding action.
         """
         if self.__item_id_gen >= self.__max_id:
@@ -136,17 +111,12 @@ class Bill:
         return f"added item (id: {self.__item_id_gen}) successfully"
 
     def rem_item(self, item_id: int, /) -> bool:
-        """
-        To remove an item based on its id from the current purchase.
+        """To remove an item based on its id from the current purchase.
 
-        Parameters
-        ----------
-        item_id : int
-            The id of the item, which should be removed.
+        Args:
+            item_id: The id of the item, which should be removed.
 
-        Returns
-        -------
-        bool
+        Returns:
             Whether the item was removed or not.
         """
         item_to_rem = self.__items.get(item_id, None)

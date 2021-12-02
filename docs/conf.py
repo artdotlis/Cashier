@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import sys
+from datetime import date
 from pathlib import Path
+
 
 _ABS_CASH = Path(".").absolute().parent
 _ABS_SRC = str(_ABS_CASH.joinpath("src"))
@@ -8,21 +10,21 @@ sys.path.insert(0, str(_ABS_CASH))
 sys.path.insert(0, _ABS_SRC)
 
 
-cashier_version = __import__("src.cashier.version", fromlist=["get_version"])
+_VERSION = __import__("src.cashier.version", fromlist=["get_version"])
 
 
 # -- Project information -------------------------------------------------------
 
 project = "Cashier"
-copyright = "2021, Artur Lissin"
 author = "Artur Lissin"
-release = "v0.1.0"
+year = date.today().year
+copyright = f"©{year} {author}."
 
 
 # -- General configuration -----------------------------------------------------
 
 extensions = [
-    "numpydoc",
+    "sphinx.ext.napoleon",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.viewcode",
@@ -33,33 +35,27 @@ extensions = [
 templates_path = ["_templates"]
 exclude_patterns = []
 source_suffix = ".rst"
-pygments_style = "sphinx"
+add_module_names = False
+add_function_parentheses = True
 
 
-# -- Options for numpydoc ------------------------------------------------------
+# -- Options for napoleon ------------------------------------------------------
 
-numpydoc_use_plots = True
-numpydoc_show_class_members = False
-numpydoc_show_inherited_class_members = False
-numpydoc_class_members_toctree = True
-numpydoc_attributes_as_param_list = True
-numpydoc_xref_param_type = True
-numpydoc_xref_aliases = {
-    "PurchasedItem": "src.cashier.purchase.container.PurchasedItem",
-    "OutFormatter": "src.cashier.purchase.formatter.OutFormatter",
-    "TaxCalculator": "src.cashier.purchase.tax_calculator.TaxCalculator",
-    "Callable": "collections.abc.Callable",
-    "Path": "pathlib.Path",
-    "Decimal": "decimal.Decimal",
-}
-numpydoc_xref_ignore = {
-    "optional",
-    "type_without_description",
-    "BadException",
-    "default",
-}
-numpydoc_validation_checks = {"all", "GL01", "SA04", "RT03"}
-numpydoc_validation_excludeset = {}
+napoleon_google_docstring = True
+napoleon_numpy_docstring = False
+napoleon_include_init_with_doc = False
+napoleon_include_private_with_doc = False
+napoleon_include_special_with_doc = True
+napoleon_use_admonition_for_examples = False
+napoleon_use_admonition_for_notes = False
+napoleon_use_admonition_for_references = False
+napoleon_use_ivar = False
+napoleon_use_param = True
+napoleon_use_rtype = False
+napoleon_use_keyword = False
+napoleon_preprocess_types = False
+napoleon_type_aliases = {}
+napoleon_attr_annotations = True
 
 
 # -- Options for intersphinx ---------------------------------------------------
@@ -78,27 +74,38 @@ autosummary_generate = True
 autoclass_content = "class"
 autodoc_class_signature = "mixed"
 autodoc_typehints = "signature"
-autodoc_typehints_description_target = "all"
-autodoc_inherit_docstrings = False
+autodoc_typehints_description_target = "documented"
+autodoc_inherit_docstrings = True
+
+
+# -- Options for autodoc typehints ---------------------------------------------
+
+set_type_checking_flag = False
+typehints_fully_qualified = False
+always_document_param_types = False
+typehints_document_rtype = True
+simplify_optional_unions = True
 
 
 # -- Options for HTML output ---------------------------------------------------
 
-html_theme = "pydata_sphinx_theme"
+html_theme = "sphinx_rtd_theme"
+pygments_style = "monokai"
 html_theme_options = {
-    "icon_links": [
-        {
-            "name": "GitHub",
-            "url": "https://github.com/arturOnRails/Cashier",
-            "icon": "fab fa-github",
-        }
-    ]
+    "display_version": True,
+    "prev_next_buttons_location": "bottom",
+    "style_external_links": False,
+    # Toc options
+    "collapse_navigation": True,
+    "sticky_navigation": True,
+    "navigation_depth": 2,
+    "includehidden": True,
+    "titles_only": False,
 }
-html_title = f"Cashier {cashier_version.get_version()} documentation"
+html_title = f"Cashier v{_VERSION.get_version()}"
 html_static_path = ["_static"]
 master_doc = "index"
 html_use_modindex = True
 html_copy_source = False
 html_domain_indices = True
 html_file_suffix = ".html"
-add_module_names = False

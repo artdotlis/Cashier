@@ -9,15 +9,11 @@ from src.cashier.purchase.container import PurchasedItem
 
 @final
 class TaxCalculator:
-    """
-    Calculates sales taxes for a purchased item.
+    """Calculates sales taxes for a purchased item.
 
-    Parameters
-    ----------
-    import_taxes : float
-        Sales taxes for imported items.
-    normal_taxes : float
-        Basic sales taxes.
+    Args:
+        import_taxes: Sales taxes for imported items.
+        normal_taxes: Basic sales taxes.
     """
 
     def __init__(self, import_taxes: float, normal_taxes: float, /) -> None:
@@ -51,21 +47,14 @@ class TaxCalculator:
 
     @staticmethod
     def check_taxes(tax: float, default_t: float, msg: str, /) -> float:
-        """
-        To check whether the given tax is negative.
+        """To check whether the given tax is negative.
 
-        Parameters
-        ----------
-        tax : float
-            Tax value that should be tested.
-        default_t : float
-            Replacement value for a negative ``tax`` value.
-        msg : str
-            Message to be printed when ``tax`` is negative.
+        Args:
+            tax: Tax value that should be tested.
+            default_t: Replacement value for a negative ``tax`` value.
+            msg: Message to be printed when ``tax`` is negative.
 
-        Returns
-        -------
-        float
+        Returns:
             The corrected value for the sales tax.
         """
         if tax >= 0:
@@ -74,29 +63,21 @@ class TaxCalculator:
         return default_t
 
     def _calc_tax(self, price: Decimal, tax: Decimal, cnt: int, /) -> Decimal:
-        """
-        To calculate sales taxes.
+        """To calculate sales taxes.
 
         This method returns the sales tax for ``cnt`` items
         with the same ``price``. The sales tax value is rounder and
-        formatted based on the rules defined in `TaxCalculator`.
+        formatted based on the rules defined in ``TaxCalculator``.
 
-        Parameters
-        ----------
-        price : Decimal
-            Price of the purchased item. Must be greater than zero.
-        tax : Decimal
-            Sales tax, which will be used in the tax-calculation.
-        cnt : int
-            Amount of the purchased item.
+        Args:
+            price: Price of the purchased item. Must be greater than zero.
+            tax: Sales tax, which will be used in the tax-calculation.
+            cnt: Amount of the purchased item.
 
-        Returns
-        -------
-        Decimal
+        Returns:
             Calculated and formatted sales taxes.
 
-        Notes
-        -----
+        Note:
             The taxes are rounded similar to the ``round(20 * total) / 20``
             approach and only print two decimal places.
         """
@@ -108,17 +89,12 @@ class TaxCalculator:
         return taxes.quantize(self.__precision[1])
 
     def tax(self, p_item: PurchasedItem, /) -> Decimal:
-        """
-        To calculate sales taxes for a purchased item.
+        """To calculate sales taxes for a purchased item.
 
-        Parameters
-        ----------
-        p_item: PurchasedItem
-            Purchased item.
+        Args:
+            p_item: Purchased item.
 
-        Returns
-        -------
-        Decimal
+        Returns:
             Calculated and formatted sales taxes for the purchased item ``p_item``.
         """
         abs_price: Decimal = abs(p_item.price)
@@ -130,34 +106,25 @@ class TaxCalculator:
         return self.__taxes[2].quantize(self.__precision[1])
 
     def new_import_tax(self, tax: float, /) -> None:
-        """
-        To set a new value for the import sales taxes.
+        """To set a new value for the import sales taxes.
 
-        Parameters
-        ----------
-        tax : float
-            New value for the import sales taxes.
+        Args:
+            tax: New value for the import sales taxes.
         """
         self.__taxes = (Decimal(str(tax)), self.__taxes[1], self.__taxes[2])
 
     def new_normal_tax(self, tax: float, /) -> None:
-        """
-        To set a new value for the basic sales taxes.
+        """To set a new value for the basic sales taxes.
 
-        Parameters
-        ----------
-        tax : float
-            New value for the basic sales taxes.
+        Args:
+            tax: New value for the basic sales taxes.
         """
         self.__taxes = (self.__taxes[0], Decimal(str(tax)), self.__taxes[2])
 
     def __str__(self) -> str:
-        """
-        To create a string representation.
+        """To create a string representation.
 
-        Returns
-        -------
-        str
+        Returns:
             String representation of the ``TaxCalculator`` object.
         """
         return (
