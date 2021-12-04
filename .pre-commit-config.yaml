@@ -44,42 +44,27 @@ repos:
     args: [--autofix]
     stages: [pre-commit]
 
-      # git checks
-  - id: check-merge-conflict
-    stages: [pre-commit]
-  - id: check-added-large-files
-    exclude: tests/media/.+
-    stages: [pre-commit]
-  - id: detect-private-key
-    stages: [pre-commit]
-  - id: check-case-conflict
-    stages: [pre-commit]
-      # General quality checks
-  - id: check-symlinks
-    stages: [pre-commit]
-  - id: check-executables-have-shebangs
-    stages: [pre-commit]
-  - id: check-shebang-scripts-are-executable
-    stages: [pre-commit]
-  - id: mixed-line-ending
-    stages: [pre-commit]
-  - id: trailing-whitespace
-    args: [--markdown-linebreak-ext=md]
-    stages: [pre-commit]
-  - id: end-of-file-fixer
-    exclude: requirements.txt
-    stages: [pre-commit]
+        # git checks
+    - id: check-merge-conflict
+    - id: check-added-large-files
+      exclude: tests/media/.+
+    - id: detect-private-key
+    - id: check-case-conflict
 
-      ###################################### Python ##################################
-      # Python checks
-  - id: check-builtin-literals
-    stages: [pre-commit]
-  - id: check-docstring-first
-    stages: [pre-commit]
-  - id: debug-statements
-    stages: [pre-commit]
-  - id: fix-byte-order-marker
-    stages: [pre-commit]
+    # Python checks
+    - id: check-docstring-first
+    - id: debug-statements
+    - id: requirements-txt-fixer
+    - id: fix-encoding-pragma
+    - id: fix-byte-order-marker
+    - id: name-tests-test
+      args: [--django]
+
+    # General quality checks
+    - id: mixed-line-ending
+    - id: trailing-whitespace
+      args: [--markdown-linebreak-ext=md]
+    - id: end-of-file-fixer
 
   # python formatter
 - repo: https://github.com/psf/black
