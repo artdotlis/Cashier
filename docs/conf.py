@@ -3,7 +3,6 @@ import sys
 from datetime import date
 from pathlib import Path
 
-
 _ABS_CASH = Path(".").absolute().parent
 _ABS_SRC = str(_ABS_CASH.joinpath("src"))
 sys.path.insert(0, str(_ABS_CASH))

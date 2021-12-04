@@ -20,3 +20,15 @@ class PurchasedItem:
     """The amount of the items to purchase."""
     taxed: bool
     """Describes whether the basic sales taxes should be applied."""
+
+
+@dataclass
+class PItemContainer:
+    """A container for holding a purchased item and its sales taxes."""
+
+    item: PurchasedItem
+    """The purchased item."""
+    id: int
+    """The id of the purchased item."""
+    sales_taxes: Decimal
+    """The sales taxes of the purchased item."""

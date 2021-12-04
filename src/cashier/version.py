@@ -2,7 +2,6 @@
 """Library version."""
 from typing import Final
 
-
 _VERSION: Final[str] = "0.2.0-alpha"
 
 

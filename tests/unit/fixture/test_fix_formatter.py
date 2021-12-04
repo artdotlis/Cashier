@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from src.cashier.purchase.formatter import InFormatter
-from src.cashier.purchase.formatter import OutFormatter
-from src.cashier.register import get_default_out
-from src.cashier.register import get_default_terms
+from src.cashier.purchase.formatter import InFormatter, OutFormatter
+from src.cashier.register import get_default_out, get_default_terms
 
 
 @pytest.fixture

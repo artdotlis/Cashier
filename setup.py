@@ -3,7 +3,6 @@ from setuptools import setup
 
 from src.cashier.version import get_version
 
-
 VERSION = get_version()
 
 

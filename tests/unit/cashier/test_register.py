@@ -7,8 +7,7 @@ from unittest.mock import patch
 
 import pytest
 
-from src.cashier.register import decide_if_taxed
-from src.cashier.register import start_register
+from src.cashier.register import decide_if_taxed, start_register
 
 
 @pytest.fixture

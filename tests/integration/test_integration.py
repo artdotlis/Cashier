@@ -2,12 +2,9 @@
 import pytest
 
 from src.cashier.purchase.bill import Bill
-from src.cashier.purchase.formatter import InFormatter
-from src.cashier.purchase.formatter import OutFormatter
+from src.cashier.purchase.formatter import InFormatter, OutFormatter
 from src.cashier.purchase.tax_calculator import TaxCalculator
-from src.cashier.register import decide_if_taxed
-from src.cashier.register import get_default_out
-from src.cashier.register import get_default_terms
+from src.cashier.register import decide_if_taxed, get_default_out, get_default_terms
 
 
 @pytest.fixture

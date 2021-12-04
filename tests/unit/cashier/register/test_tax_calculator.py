@@ -6,7 +6,6 @@ import pytest
 from src.cashier.purchase.container import PurchasedItem
 from src.cashier.purchase.tax_calculator import TaxCalculator
 
-
 pytest_plugins = ("tests.unit.fixture.test_fix_taxes",)
 
 

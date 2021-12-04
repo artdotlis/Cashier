@@ -33,17 +33,19 @@ repos:
       args: [--markdown-linebreak-ext=md]
     - id: end-of-file-fixer
 
+
+  # python imports
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+
   # python formatter
   - repo: https://github.com/psf/black
     rev: 21.11b1
     hooks:
-    - id: black
-
-  # python imports
-  - repo: https://github.com/asottile/reorder_python_imports
-    rev: v2.6.0
-    hooks:
-      - id: reorder-python-imports
+      - id: black
 
   # new python style
   - repo: https://github.com/asottile/pyupgrade

@@ -4,14 +4,14 @@ from collections.abc import Iterable
 from decimal import Decimal
 from typing import final
 
-from src.cashier.purchase.container import PurchasedItem
+from src.cashier.purchase.container import PItemContainer, PurchasedItem
 from src.cashier.purchase.formatter import OutFormatter
 from src.cashier.purchase.tax_calculator import TaxCalculator
 
 
 @final
 class Bill:
-    """A container holding all purchased item.
+    """A container holding all purchased items.
 
     Args:
         formatter: The formatter used for creating the output of the current purchase.
@@ -21,8 +21,7 @@ class Bill:
     def __init__(self, formatter: OutFormatter, tax_calc: TaxCalculator, /) -> None:
         """To initialise the class."""
         super().__init__()
-        self.__taxes: dict[int, Decimal] = {}
-        self.__items: dict[int, PurchasedItem] = {}
+        self.__purchase: dict[int, PItemContainer] = {}
         self.__item_id_gen: int = 0
         self.__max_id: int = 1_000_000
         self.__tax_calc: TaxCalculator = tax_calc
@@ -32,15 +31,17 @@ class Bill:
         """To calculate the sum of all sales taxes and item prices.
 
         Returns:
-            Returns to sums, the sum of all sales taxes and
+            Returns two sums, the sum of all sales taxes and
             the sum of all item prices including their sales taxes.
         """
-        sales_taxes: Decimal = Decimal(str(sum(self.__taxes.values())))
+        sales_taxes: Decimal = Decimal(
+            str(sum(p_item.sales_taxes for p_item in self.__purchase.values()))
+        )
         total: Decimal = Decimal(
             str(
                 sum(
-                    item_v.price * item_v.cnt + self.__taxes[item_k]
-                    for item_k, item_v in self.__items.items()
+                    p_el.item.price * p_el.item.cnt + p_el.sales_taxes
+                    for p_el in self.__purchase.values()
                 )
             )
         )
@@ -52,8 +53,8 @@ class Bill:
         Yields:
             A formatted output for a purchased item.
         """
-        for item_k, item_v in self.__items.items():
-            yield self.__bill_format.out_list_item(item_v, self.__taxes[item_k])
+        for p_el in self.__purchase.values():
+            yield self.__bill_format.out_list_item(p_el)
 
     def _format_price(self) -> Iterable[str]:
         """To iteratively sum up the whole purchase.
@@ -82,10 +83,10 @@ class Bill:
 
         Returns:
             Returns a boolean and a string. The boolean
-            describes whether the current purchase is empty or not and
+            describes whether the current purchase is empty and
             the string is a description of the whole purchase.
         """
-        if not self.__items:
+        if not self.__purchase:
             return False, ""
         return True, "\n".join(self._join_generator())
 
@@ -93,7 +94,7 @@ class Bill:
         """To add an item to the current purchase.
 
         Args:
-            p_item: The purchased item to be add.
+            p_item: The purchased item which will be added.
 
         Returns:
             Description for the adding action.
@@ -106,22 +107,22 @@ class Bill:
         if p_item.price <= 0:
             return "the item price can't be negative"
         self.__item_id_gen += 1
-        self.__items[self.__item_id_gen] = p_item
-        self.__taxes[self.__item_id_gen] = self.__tax_calc.tax(p_item)
+        self.__purchase[self.__item_id_gen] = PItemContainer(
+            id=self.__item_id_gen, item=p_item, sales_taxes=self.__tax_calc.tax(p_item)
+        )
         return f"added item (id: {self.__item_id_gen}) successfully"
 
     def rem_item(self, item_id: int, /) -> bool:
         """To remove an item based on its id from the current purchase.
 
         Args:
-            item_id: The id of the item, which should be removed.
+            item_id: The id of the item which should be removed.
 
         Returns:
-            Whether the item was removed or not.
+            Whether the item was successfully removed.
         """
-        item_to_rem = self.__items.get(item_id, None)
+        item_to_rem = self.__purchase.get(item_id, None)
         if item_to_rem is None:
             return False
-        del self.__items[item_id]
-        del self.__taxes[item_id]
+        del self.__purchase[item_id]
         return True

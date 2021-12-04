@@ -3,10 +3,8 @@ from decimal import Decimal
 
 import pytest
 
-from src.cashier.purchase.container import PurchasedItem
-from src.cashier.register import get_default_out
-from src.cashier.register import get_default_terms
-
+from src.cashier.purchase.container import PItemContainer, PurchasedItem
+from src.cashier.register import get_default_out, get_default_terms
 
 pytest_plugins = ("tests.unit.fixture.test_fix_formatter",)
 
@@ -47,7 +45,12 @@ class TestOutFormatter:
 
     def test_list_item(self, out_formatter, out_p_item_list):
         for out_i in out_p_item_list:
-            assert out_formatter.out_list_item(out_i[0], out_i[1]) == out_i[2]
+            assert (
+                out_formatter.out_list_item(
+                    PItemContainer(id=0, item=out_i[0], sales_taxes=out_i[1])
+                )
+                == out_i[2]
+            )
 
     def test_str(self, out_formatter):
         assert isinstance(str(out_formatter), str)
