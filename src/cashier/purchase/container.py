@@ -1,28 +1,28 @@
 # -*- coding: utf-8 -*-
 """A module providing global data containers."""
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import final
 
 
 @final
-@dataclass
+@dataclass(frozen=True, slots=True)
 class PurchasedItem:
     """A container describing the purchased item."""
 
-    imported: bool
+    imported: bool = field()
     """Whether the item is imported or not."""
-    name: str
+    name: str = field()
     """The name of the item."""
-    price: Decimal
+    price: Decimal = field()
     """The price of the item."""
-    cnt: int
+    cnt: int = field()
     """The amount of the items to purchase."""
-    taxed: bool
+    taxed: bool = field()
     """Describes whether the basic sales taxes should be applied."""
 
 
-@dataclass
+@dataclass(frozen=True, slots=True)
 class PItemContainer:
     """A container for holding a purchased item and its sales taxes."""
 
