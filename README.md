@@ -1,8 +1,8 @@
 # Cashier
 
-[![release: v0.1.0](https://img.shields.io/badge/rel-v0.1.0-blue.svg)](https://github.com/arturOnRails/Cashier)
-[![GitHub](https://img.shields.io/github/license/arturOnRails/Cashier)](https://raw.githubusercontent.com/arturOnRails/Cashier/main/LICENSE)
-[![main](https://github.com/arturOnRails/Cashier/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/arturOnRails/Cashier/actions/workflows/main.yml)
+[![release: v0.1.0](https://img.shields.io/badge/rel-v0.1.0-blue.svg)](https://github.com/artdotlis/Cashier)
+[![GitHub](https://img.shields.io/github/license/artdotlis/Cashier)](https://raw.githubusercontent.com/artdotlis/Cashier/main/LICENSE)
+[![main](https://github.com/artdotlis/Cashier/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/artdotlis/Cashier/actions/workflows/main.yml)
 [![Documentation Status](https://readthedocs.org/projects/cashier/badge/?version=latest)](https://cashier.readthedocs.io/?badge=latest)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
@@ -32,13 +32,13 @@ $ conda activate cashier
 Latest
 
 ```shell
-$ pip install git+https://github.com/arturOnRails/Cashier.git
+$ pip install git+https://github.com/artdotlis/Cashier.git
 ```
 
 Specific release
 
 ```shell
-$ pip install git+https://github.com/arturOnRails/Cashier.git@<TAG>#egg=Cashier
+$ pip install git+https://github.com/artdotlis/Cashier.git@<TAG>#egg=Cashier
 ```
 
 ## Usage

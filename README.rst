@@ -31,13 +31,13 @@ Latest
 
 .. code:: shell
 
-   $ pip install git+https://github.com/arturOnRails/Cashier.git
+   $ pip install git+https://github.com/artdotlis/Cashier.git
 
 Specific release
 
 .. code:: shell
 
-   $ pip install git+https://github.com/arturOnRails/Cashier.git@<TAG>#egg=Cashier
+   $ pip install git+https://github.com/artdotlis/Cashier.git@<TAG>#egg=Cashier
 
 Usage
 -----
@@ -69,11 +69,11 @@ ToDo
 -  Add new features for the v0.2.0 release
 
 .. |release: v0.1.0| image:: https://img.shields.io/badge/rel-v0.1.0-blue.svg
-   :target: https://github.com/arturOnRails/Cashier
-.. |GitHub| image:: https://img.shields.io/github/license/arturOnRails/Cashier
-   :target: https://raw.githubusercontent.com/arturOnRails/Cashier/main/LICENSE
-.. |main| image:: https://github.com/arturOnRails/Cashier/actions/workflows/main.yml/badge.svg?branch=main
-   :target: https://github.com/arturOnRails/Cashier/actions/workflows/main.yml
+   :target: https://github.com/artdotlis/Cashier
+.. |GitHub| image:: https://img.shields.io/github/license/artdotlis/Cashier
+   :target: https://raw.githubusercontent.com/artdotlis/Cashier/main/LICENSE
+.. |main| image:: https://github.com/artdotlis/Cashier/actions/workflows/main.yml/badge.svg?branch=main
+   :target: https://github.com/artdotlis/Cashier/actions/workflows/main.yml
 .. |Documentation Status| image:: https://readthedocs.org/projects/cashier/badge/?version=latest
    :target: https://cashier.readthedocs.io/?badge=latest
 .. |Code style: black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
