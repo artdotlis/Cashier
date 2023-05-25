@@ -44,21 +44,48 @@ repos:
     args: [--autofix]
     stages: [pre-commit]
 
-        # git checks
-    - id: check-merge-conflict
-    - id: check-added-large-files
-      exclude: tests/media/.+
-    - id: detect-private-key
-    - id: check-case-conflict
+  ###################################### Default ###################################
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+      # Identify invalid files
+  - id: check-ast
+    stages: [pre-commit]
+  - id: check-yaml
+    stages: [pre-commit]
+  - id: check-json
+    stages: [pre-commit]
+  - id: check-toml
+    stages: [pre-commit]
+  - id: pretty-format-json
+    args: [--autofix]
+    stages: [pre-commit]
 
-    # Python checks
-    - id: check-docstring-first
-    - id: debug-statements
-    - id: requirements-txt-fixer
-    - id: fix-encoding-pragma
-    - id: fix-byte-order-marker
-    - id: name-tests-test
-      args: [--django]
+      # git checks
+  - id: check-merge-conflict
+    stages: [pre-commit]
+  - id: check-added-large-files
+    exclude: tests/media/.+
+    stages: [pre-commit]
+  - id: detect-private-key
+    stages: [pre-commit]
+  - id: check-case-conflict
+    stages: [pre-commit]
+      # General quality checks
+  - id: check-symlinks
+    stages: [pre-commit]
+  - id: check-executables-have-shebangs
+    stages: [pre-commit]
+  - id: check-shebang-scripts-are-executable
+    stages: [pre-commit]
+  - id: mixed-line-ending
+    stages: [pre-commit]
+  - id: trailing-whitespace
+    args: [--markdown-linebreak-ext=md]
+    stages: [pre-commit]
+  - id: end-of-file-fixer
+    exclude: requirements.txt
+    stages: [pre-commit]
 
     # General quality checks
     - id: mixed-line-ending
