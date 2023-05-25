@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
 from decimal import Decimal
 
 import pytest
 
-from src.cashier.purchase.container import PurchasedItem
-from src.cashier.purchase.tax_calculator import TaxCalculator
-
+from cashier.purchase.container import PurchasedItem
+from cashier.purchase.tax_calculator import TaxCalculator
 
 pytest_plugins = ("tests.unit.fixture.test_fix_taxes",)
 
@@ -18,7 +16,7 @@ def _p_it_cr(
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def tax_tests_basic() -> tuple[list[tuple[Decimal, int, str]], Decimal]:
     basic_taxes = Decimal("0.1")
     return (
@@ -43,7 +41,7 @@ def tax_tests_basic() -> tuple[list[tuple[Decimal, int, str]], Decimal]:
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def zero_taxed_items() -> list[PurchasedItem]:
     return [
         _p_it_cr(0, Decimal("10.00"), 2, True, True),
@@ -52,7 +50,7 @@ def zero_taxed_items() -> list[PurchasedItem]:
     ]
 
 
-@pytest.fixture
+@pytest.fixture()
 def taxed_items(tax_tests_basic) -> tuple[Decimal, list[tuple[PurchasedItem, str]]]:
     sales_only_tax = [
         (_p_it_cr(item_i, item_el[0], item_el[1], False, True), item_el[2])
@@ -65,7 +63,7 @@ def taxed_items(tax_tests_basic) -> tuple[Decimal, list[tuple[PurchasedItem, str
     return tax_tests_basic[1], sales_only_tax
 
 
-@pytest.fixture
+@pytest.fixture()
 def taxed_imported_items(
     tax_tests_basic,
 ) -> tuple[Decimal, Decimal, list[tuple[PurchasedItem, str]]]:
@@ -81,7 +79,7 @@ def taxed_imported_items(
     return tax_tests_basic[1], import_tax, imported_taxes
 
 
-@pytest.fixture
+@pytest.fixture()
 def no_tax() -> list[tuple[PurchasedItem, str]]:
     return [
         (_p_it_cr(1, Decimal("10.00"), 1, False, False), "0.00"),
@@ -91,7 +89,7 @@ def no_tax() -> list[tuple[PurchasedItem, str]]:
     ]
 
 
-@pytest.fixture
+@pytest.fixture()
 def init_tax() -> list[tuple[float, float]]:
     return [(0.0, 0.0), (-2.0, 1.0), (2.0, 2.0)]
 
