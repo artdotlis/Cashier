@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 from decimal import Decimal
 
 import pytest
 
-from src.cashier.purchase.bill import Bill
-from src.cashier.purchase.container import PurchasedItem
+from cashier.purchase.bill import Bill
+from cashier.purchase.container import PurchasedItem
 
 pytest_plugins = (
     "tests.unit.fixture.test_fix_formatter",
@@ -12,12 +11,12 @@ pytest_plugins = (
 )
 
 
-@pytest.fixture
+@pytest.fixture()
 def bill(tax_calc, out_formatter) -> Bill:
     return Bill(out_formatter, tax_calc)
 
 
-@pytest.fixture
+@pytest.fixture()
 def add_act() -> list[tuple[PurchasedItem, int, str, bool]]:
     return [
         (
@@ -47,7 +46,7 @@ def add_act() -> list[tuple[PurchasedItem, int, str, bool]]:
     ]
 
 
-@pytest.fixture
+@pytest.fixture()
 def fin_container(bill) -> tuple[Bill, str]:
     items = [
         PurchasedItem(

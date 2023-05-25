@@ -1,25 +1,25 @@
-# -*- coding: utf-8 -*-
 """A module saving and describing a purchase."""
 from collections.abc import Iterable
 from decimal import Decimal
 from typing import final
 
-from src.cashier.purchase.container import PItemContainer, PurchasedItem
-from src.cashier.purchase.formatter import OutFormatter
-from src.cashier.purchase.tax_calculator import TaxCalculator
+from cashier.purchase.container import PItemContainer, PurchasedItem
+from cashier.purchase.formatter import OutFormatter
+from cashier.purchase.tax_calculator import TaxCalculator
 
 
 @final
 class Bill:
-    """A container holding all purchased items.
-
-    Args:
-        formatter: The formatter used for creating the output of the current purchase.
-        tax_calc: The calculator for the sales taxes.
-    """
+    """A container holding all purchased items."""
 
     def __init__(self, formatter: OutFormatter, tax_calc: TaxCalculator, /) -> None:
-        """To initialise the class."""
+        """To initialise the class.
+
+        Args:
+            formatter (OutFormatter): The formatter used for creating
+                the output of the current purchase.
+            tax_calc (TaxCalculator): The calculator for the sales taxes.
+        """
         super().__init__()
         self.__purchase: dict[int, PItemContainer] = {}
         self.__item_id_gen: int = 0
@@ -31,7 +31,7 @@ class Bill:
         """To calculate the sum of all sales taxes and item prices.
 
         Returns:
-            Returns two sums, the sum of all sales taxes and
+            tuple[Decimal, Decimal]: Returns two sums, the sum of all sales taxes and
             the sum of all item prices including their sales taxes.
         """
         sales_taxes: Decimal = Decimal(
@@ -50,8 +50,11 @@ class Bill:
     def _format_item_list(self) -> Iterable[str]:
         """To iteratively generate the output of an item.
 
+        Returns:
+            Iterable[str]: A formatted output for a purchased item.
+
         Yields:
-            A formatted output for a purchased item.
+            Iterator[Iterable[str]]: A formatted output for a purchased item.
         """
         for p_el in self.__purchase.values():
             yield self.__bill_format.out_list_item(p_el)
@@ -59,9 +62,14 @@ class Bill:
     def _format_price(self) -> Iterable[str]:
         """To iteratively sum up the whole purchase.
 
+        Returns:
+            Iterable[str]: A part of the formatted output summing up the whole purchase.
+                Is either the total sales taxes or the price for the whole purchase.
+
         Yields:
-            A part of the formatted output summing up the whole purchase.
-            Is either the total sales taxes or the price for the whole purchase.
+            Iterator[Iterable[str]]: A part of the formatted output
+                summing up the whole purchase. Is either the total sales
+                taxes or the price for the whole purchase.
         """
         total_out = self._calc_total()
         yield self.__bill_format.out_sales_taxes(total_out[0])
@@ -70,8 +78,12 @@ class Bill:
     def _join_generator(self) -> Iterable[str]:
         """To iteratively generate the output for the whole purchase.
 
+        Returns:
+            Iterable[str]: A part of the formatted output for the whole purchase.
+
         Yields:
-            A part of the formatted output for the whole purchase.
+            Iterator[Iterable[str]]: A part of the formatted
+                output for the whole purchase.
         """
         for item_i in self._format_item_list():
             yield item_i
@@ -82,9 +94,9 @@ class Bill:
         """To finish the current purchase.
 
         Returns:
-            Returns a boolean and a string. The boolean
-            describes whether the current purchase is empty and
-            the string is a description of the whole purchase.
+            tuple[bool, str]: Returns a boolean and a string. The boolean
+                describes whether the current purchase is empty and
+                the string is a description of the whole purchase.
         """
         if not self.__purchase:
             return False, ""
@@ -94,10 +106,10 @@ class Bill:
         """To add an item to the current purchase.
 
         Args:
-            p_item: The purchased item which will be added.
+            p_item (PurchasedItem): The purchased item which will be added.
 
         Returns:
-            Description for the adding action.
+            str: Description for the adding action.
         """
         if self.__item_id_gen >= self.__max_id:
             return (
@@ -116,10 +128,10 @@ class Bill:
         """To remove an item based on its id from the current purchase.
 
         Args:
-            item_id: The id of the item which should be removed.
+            item_id (int): The id of the item which should be removed.
 
         Returns:
-            Whether the item was successfully removed.
+            bool: Whether the item was successfully removed.
         """
         item_to_rem = self.__purchase.get(item_id, None)
         if item_to_rem is None:

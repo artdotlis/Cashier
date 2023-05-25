@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """A module providing input and output formatters."""
 import re
 from collections.abc import Callable
@@ -6,7 +5,7 @@ from decimal import Decimal
 from re import Pattern
 from typing import Final, final
 
-from src.cashier.purchase.container import PItemContainer, PurchasedItem
+from cashier.purchase.container import PItemContainer, PurchasedItem
 
 
 @final
@@ -153,7 +152,8 @@ class InFormatter:
             imported=imported_match is not None,
             name=item_name,
             price=Decimal(
-                f"{match_res.group(3)}{'' if match_res.group(4) is None else match_res.group(4)}"
+                f"{match_res.group(3)}"
+                + f"{'' if match_res.group(4) is None else match_res.group(4)}"
             ),
             cnt=int(match_res.group(1)),
             taxed=self.__taxed_f(item_name),

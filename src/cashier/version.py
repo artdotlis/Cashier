@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
 """Library version."""
-from typing import Final
-
-_VERSION: Final[str] = "0.2.0-alpha"
+import pkg_resources
 
 
 def get_version() -> str:
@@ -11,4 +8,4 @@ def get_version() -> str:
     Returns:
         Global software version.
     """
-    return _VERSION
+    return pkg_resources.get_distribution("cashier").version

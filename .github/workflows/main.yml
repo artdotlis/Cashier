@@ -3,46 +3,52 @@ name: main
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
   release:
-    types: [ created ]
+    types: [created]
 
 jobs:
   mac_win_test:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.10" ]
-        os: [ windows-latest, macos-latest ]
+        python-version: ['3.11']
+        os: [windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox virtualenv setuptools
-      - name: tox test
-        run: |
-          tox -e py
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install tox
+    - name: tox test
+      run: |
+        tox -e py
   lin_lint:
+    env:
+      PY_DIR: pyenv
+      CU_HOME: /home/custom
     strategy:
       fail-fast: false
-      matrix:
-        python-version: [ "3.10" ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox virtualenv setuptools
-      - name: tox lint
-        run: |
-          tox -e py
-          if [ ${{ matrix.python-version }} = "3.10" ]; then tox -e pre-commit,mypy,flake8; fi
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        sudo mkdir -p $CU_HOME && sudo chown runner -R $CU_HOME
+        sudo apt install -y libedit-dev curl make git-lfs
+        curl https://pyenv.run | PYENV_ROOT=$CU_HOME/$PY_DIR bash
+        echo "$CU_HOME/$PY_DIR/bin" >> $GITHUB_PATH
+        echo "$CU_HOME/$PY_DIR/shims" >> $GITHUB_PATH
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: lint and test
+      run: |
+        make dev
+        make runCheck

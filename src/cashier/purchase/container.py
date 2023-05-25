@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """A module providing global data containers."""
 from dataclasses import dataclass, field
 from decimal import Decimal

@@ -1,20 +1,19 @@
-# -*- coding: utf-8 -*-
 """A module providing a starting procedure."""
 from collections.abc import Callable
 from pathlib import Path
 from typing import Final
 
-from src.cashier.purchase.bill import Bill
-from src.cashier.purchase.formatter import InFormatter, OutFormatter
-from src.cashier.purchase.tax_calculator import TaxCalculator
+from cashier.purchase.bill import Bill
+from cashier.purchase.formatter import InFormatter, OutFormatter
+from cashier.purchase.tax_calculator import TaxCalculator
 
 # default values for the input-formatter
-_DI_TERM: Final[str] = "##"
-_DI_BUY: Final[str] = "#"
+DI_TERM: Final[str] = "##"
+DI_BUY: Final[str] = "#"
 # default values for the output-formatter
-_DO_TOTAL: Final[str] = "Total"
-_DO_SALES_T: Final[str] = "Sales Taxes"
-_DO_IMP: Final[str] = "imported"
+DO_TOTAL: Final[str] = "Total"
+DO_SALES_T: Final[str] = "Sales Taxes"
+DO_IMP: Final[str] = "imported"
 # default tax exemptions
 _D_TAX_E: Final[set[str]] = {
     "book",
@@ -26,33 +25,12 @@ _D_TAX_E: Final[set[str]] = {
 }
 
 
-def get_default_terms() -> tuple[str, str]:
-    """To return private default values.
-
-    Returns:
-        Returns two strings. The first describes the default string for terminating all purchases.
-        The second the default string for terminating the current purchases.
-    """
-    return _DI_TERM, _DI_BUY
-
-
-def get_default_out() -> tuple[str, str, str]:
-    """To return private default values.
-
-    Returns:
-        Returns three strings. The first describes the default string for describing
-        the purchase price. The second the default string for the sum of all sales
-        taxes of the purchase and the third the default string for describing an imported item.
-    """
-    return _DO_TOTAL, _DO_SALES_T, _DO_IMP
-
-
 def decide_if_taxed(n_taxed: set[str]) -> Callable[[str], bool]:
     """To create a decider function for omitting taxation.
 
     Args:
         n_taxed: The set containing all items which shouldn't be taxed.
-                 If empty, a default set will be chosen.
+            If empty, a default set will be chosen.
 
     Returns:
         Decider function for omitting taxation.
@@ -110,9 +88,9 @@ def start_register(tax_file: None | Path, /) -> None:
     Args:
         tax_file: The optional file containing the names of not-taxed items.
     """
-    in_form = InFormatter(_DI_TERM, _DI_BUY, decide_if_taxed(_read_tax_file(tax_file)))
+    in_form = InFormatter(DI_TERM, DI_BUY, decide_if_taxed(_read_tax_file(tax_file)))
     print(str(in_form))
-    out_form = OutFormatter(_DO_TOTAL, _DO_SALES_T, _DO_IMP)
+    out_form = OutFormatter(DO_TOTAL, DO_SALES_T, DO_IMP)
     print(str(out_form))
     tax_calc = TaxCalculator(0.05, 0.1)
     print(str(tax_calc))

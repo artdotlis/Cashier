@@ -1,9 +1,9 @@
 # Cashier
 
-[![release: v0.1.0](https://img.shields.io/badge/rel-v0.1.0-blue.svg)](https://github.com/artdotlis/Cashier)
+[![release: v0.2.0](https://img.shields.io/badge/rel-v0.2.0-blue.svg)](https://github.com/artdotlis/Cashier)
 [![GitHub](https://img.shields.io/github/license/artdotlis/Cashier)](https://raw.githubusercontent.com/artdotlis/Cashier/main/LICENSE)
 [![main](https://github.com/artdotlis/Cashier/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/artdotlis/Cashier/actions/workflows/main.yml)
-[![Documentation Status](https://readthedocs.org/projects/cashier/badge/?version=latest)](https://cashier.readthedocs.io/?badge=latest)
+[![Documentation Status](https://img.shields.io/badge/docs-GitHub-blue.svg?style=flat-square)](https://artdotlis.github.io/Cashier/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
@@ -19,11 +19,11 @@ while considering their sales taxes.
 
 ### Install Dependencies
 
-Currently, **Cashier** supports only **Python 3.10** thus it is recommended
+Currently, **Cashier** supports only **Python 3.11** thus it is recommended
 to work in a **conda** environment.
 
 ```shell
-$ conda create -n cashier python=3.10
+$ conda create -n cashier python=3.11
 $ conda activate cashier
 ```
 
@@ -57,13 +57,14 @@ $ cashier
 
 ## Development
 
-Building docs requires a linux distribution
-and the following dependencies:
+Requires a linux distribution and the following dependencies:
 
-- make
-- pandoc
+### Default
 
+-   pyenv: ~2.13
+-   GNU/Linux
 
-## ToDo
+### Dev Container
 
-- Add new features for the v0.2.0 release
+-   Docker
+-   Docker - Compose
