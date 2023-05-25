@@ -1,11 +1,11 @@
 # Cashier
 
-[![release: v0.2.0](https://img.shields.io/badge/rel-v0.2.0-blue.svg)](https://github.com/artdotlis/Cashier)
-[![GitHub](https://img.shields.io/github/license/artdotlis/Cashier)](https://raw.githubusercontent.com/artdotlis/Cashier/main/LICENSE)
-[![main](https://github.com/artdotlis/Cashier/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/artdotlis/Cashier/actions/workflows/main.yml)
+[![release: v0.2.0](https://img.shields.io/badge/rel-v0.2.0-blue.svg?style=flat-square)](https://github.com/artdotlis/Cashier)
+[![GitHub](https://img.shields.io/github/license/artdotlis/Cashier?style=flat-square)](https://raw.githubusercontent.com/artdotlis/Cashier/main/LICENSE)
 [![Documentation Status](https://img.shields.io/badge/docs-GitHub-blue.svg?style=flat-square)](https://artdotlis.github.io/Cashier/)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
+[![main](https://github.com/artdotlis/Cashier/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/artdotlis/Cashier/actions/workflows/main.yml)
 
 **Cashier** is a simple library meant for trying out DevOps tools.
 It provides a simple, user interactive shopping simulations.
