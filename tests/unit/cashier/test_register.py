@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collections.abc import Callable
 from io import StringIO
 from pathlib import Path
@@ -7,11 +6,10 @@ from unittest.mock import patch
 
 import pytest
 
-from src.cashier.register import decide_if_taxed
-from src.cashier.register import start_register
+from cashier.register import decide_if_taxed, start_register
 
 
-@pytest.fixture
+@pytest.fixture()
 def create_default_out() -> list[str]:
     return """---
 INPUT format:
@@ -68,7 +66,7 @@ def test_decide_if_taxed():
     assert isinstance(without_set("unknown"), bool)
 
 
-@pytest.fixture
+@pytest.fixture()
 def register_call() -> Callable[[], str]:
     runner_f = ["#", "1 chocolate at 1.00", "undefined"]
 

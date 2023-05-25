@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 """A module used for calculating taxes."""
 import decimal
 from decimal import Decimal
 from typing import final
 
-from src.cashier.purchase.container import PurchasedItem
+from cashier.purchase.container import PurchasedItem
 
 
 @final
@@ -29,7 +28,7 @@ class TaxCalculator:
                     self.check_taxes(
                         import_taxes,
                         0.05,
-                        "Import sales taxes cant be negative, setting to 0.05.",
+                        "Import sales taxes can't be negative, setting to 0.05.",
                     )
                 )
             ),
@@ -38,7 +37,7 @@ class TaxCalculator:
                     self.check_taxes(
                         normal_taxes,
                         0.1,
-                        "Basic sales taxes cant be negative, setting to 0.10.",
+                        "Basic sales taxes can't be negative, setting to 0.10.",
                     )
                 )
             ),

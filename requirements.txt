@@ -1,10 +1,1 @@
-# build
--r requirements/build.txt
-# tests
--r requirements/tests.txt
-# docs
--r requirements/docs.txt
-# lint
--r requirements/lint.txt
-# tox
--r requirements/tox.txt
+

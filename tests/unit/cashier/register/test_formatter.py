@@ -1,23 +1,20 @@
-# -*- coding: utf-8 -*-
 from decimal import Decimal
 
 import pytest
 
-from src.cashier.purchase.container import PurchasedItem
-from src.cashier.register import get_default_out
-from src.cashier.register import get_default_terms
-
+from cashier.purchase.container import PItemContainer, PurchasedItem
+from cashier.register import DI_BUY, DI_TERM, DO_IMP, DO_SALES_T, DO_TOTAL
 
 pytest_plugins = ("tests.unit.fixture.test_fix_formatter",)
 
 
-@pytest.fixture
+@pytest.fixture()
 def out_p_item_list() -> list[tuple[PurchasedItem, Decimal, str]]:
-    out_str = get_default_out()
+    out_str = DO_TOTAL, DO_SALES_T, DO_IMP
     return [
         (
             PurchasedItem(
-                imported=True, name=f"item_0", price=Decimal("2.45"), cnt=2, taxed=True
+                imported=True, name="item_0", price=Decimal("2.45"), cnt=2, taxed=True
             ),
             Decimal("1.00"),
             f"2 {out_str[2]} item_0: 3.45",
@@ -25,7 +22,7 @@ def out_p_item_list() -> list[tuple[PurchasedItem, Decimal, str]]:
         (
             PurchasedItem(
                 imported=False,
-                name=f"item_1",
+                name="item_1",
                 price=Decimal("2.45"),
                 cnt=1,
                 taxed=False,
@@ -38,22 +35,27 @@ def out_p_item_list() -> list[tuple[PurchasedItem, Decimal, str]]:
 
 class TestOutFormatter:
     def test_sales_taxes(self, out_formatter):
-        out_str = get_default_out()
+        out_str = DO_TOTAL, DO_SALES_T, DO_IMP
         assert out_formatter.out_sales_taxes(Decimal("1.45")) == f"{out_str[1]}: 1.45"
 
     def test_total(self, out_formatter):
-        out_str = get_default_out()
+        out_str = DO_TOTAL, DO_SALES_T, DO_IMP
         assert out_formatter.out_total(Decimal("1.45")) == f"{out_str[0]}: 1.45"
 
     def test_list_item(self, out_formatter, out_p_item_list):
         for out_i in out_p_item_list:
-            assert out_formatter.out_list_item(out_i[0], out_i[1]) == out_i[2]
+            assert (
+                out_formatter.out_list_item(
+                    PItemContainer(id=0, item=out_i[0], sales_taxes=out_i[1])
+                )
+                == out_i[2]
+            )
 
     def test_str(self, out_formatter):
         assert isinstance(str(out_formatter), str)
 
 
-@pytest.fixture
+@pytest.fixture()
 def in_p_item_list() -> list[tuple[str, tuple[bool, None | PurchasedItem]]]:
     return [
         (
@@ -62,7 +64,7 @@ def in_p_item_list() -> list[tuple[str, tuple[bool, None | PurchasedItem]]]:
                 True,
                 PurchasedItem(
                     imported=True,
-                    name=f"bottle of perfume",
+                    name="bottle of perfume",
                     price=Decimal("27.99"),
                     cnt=1,
                     taxed=True,
@@ -75,7 +77,7 @@ def in_p_item_list() -> list[tuple[str, tuple[bool, None | PurchasedItem]]]:
                 True,
                 PurchasedItem(
                     imported=True,
-                    name=f"bottle of perfume",
+                    name="bottle of perfume",
                     price=Decimal("27.99"),
                     cnt=1,
                     taxed=True,
@@ -88,7 +90,7 @@ def in_p_item_list() -> list[tuple[str, tuple[bool, None | PurchasedItem]]]:
                 True,
                 PurchasedItem(
                     imported=False,
-                    name=f"bottle of perfumeimported",
+                    name="bottle of perfumeimported",
                     price=Decimal("27.00"),
                     cnt=2,
                     taxed=True,
@@ -102,15 +104,15 @@ def in_p_item_list() -> list[tuple[str, tuple[bool, None | PurchasedItem]]]:
     ]
 
 
-@pytest.fixture
+@pytest.fixture()
 def term_behavior() -> list[tuple[str, bool]]:
-    in_term_str = get_default_terms()
+    in_term_str = DI_TERM, DI_BUY
     return [(in_term_str[1], True), (in_term_str[0], False), ("", True)]
 
 
-@pytest.fixture
+@pytest.fixture()
 def buy_behavior() -> list[tuple[str, bool]]:
-    in_term_str = get_default_terms()
+    in_term_str = DI_TERM, DI_BUY
     return [(in_term_str[1], False), (in_term_str[0], True), ("", True)]
 
 
