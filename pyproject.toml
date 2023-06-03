@@ -73,7 +73,8 @@ keywords = ["python", "project-prototype"]
 license = "MIT"
 name = "Cashier"
 packages = [
-  {include = "cashier", from = "src"}
+  {include = "cashier", from = "src"},
+  {include = "cashier/py.typed", from = "src"}
 ]
 readme = "README.md"
 repository = "https://github.com/artdotlis/Cashier"
