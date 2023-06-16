@@ -44,23 +44,6 @@ repos:
     args: [--autofix]
     stages: [pre-commit]
 
-  ###################################### Default ###################################
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.4.0
-  hooks:
-      # Identify invalid files
-  - id: check-ast
-    stages: [pre-commit]
-  - id: check-yaml
-    stages: [pre-commit]
-  - id: check-json
-    stages: [pre-commit]
-  - id: check-toml
-    stages: [pre-commit]
-  - id: pretty-format-json
-    args: [--autofix]
-    stages: [pre-commit]
-
       # git checks
   - id: check-merge-conflict
     stages: [pre-commit]
@@ -87,11 +70,16 @@ repos:
     exclude: requirements.txt
     stages: [pre-commit]
 
-    # General quality checks
-    - id: mixed-line-ending
-    - id: trailing-whitespace
-      args: [--markdown-linebreak-ext=md]
-    - id: end-of-file-fixer
+      ###################################### Python ##################################
+      # Python checks
+  - id: check-builtin-literals
+    stages: [pre-commit]
+  - id: check-docstring-first
+    stages: [pre-commit]
+  - id: debug-statements
+    stages: [pre-commit]
+  - id: fix-byte-order-marker
+    stages: [pre-commit]
 
   # python formatter
 - repo: https://github.com/psf/black
