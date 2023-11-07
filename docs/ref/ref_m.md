@@ -1,5 +1,5 @@
 # Cashier
 
-::: src.cashier
+::: cashier
     options:
         show_submodules: true
